@@ -44,7 +44,7 @@
 
 #navigation {
   float: left;
-  position: absolute;
+  position: fixed;
   border: 1px solid black;
   margin-right: 10px;
   z-index: 2500;

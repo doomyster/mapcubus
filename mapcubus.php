@@ -131,7 +131,8 @@ function ScanXmlData($data) {
 
 		$pieces .= '<li class="element_menu">';
 		foreach ($imgs as $im) {
-		$pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-source="http://localhost/mapcubus/tiles/' . $blob->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $blob->template . '/' . $im . '"/>' . $i->name.'</span>';
+		$size = getimagesize('http://localhost/mapcubus/tiles/'.$blob->template.'/'.$im);
+		$pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://localhost/mapcubus/tiles/' . $blob->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $blob->template . '/' . $im . '"/>' . $i->name.'</span>';
 		}
 		$pieces .= '<hr />';
 		$pieces .= '</li>';
