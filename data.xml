@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<elements>
+	<!-- In a general way, 'name' attribute represents what is displayed on screen while 'template' attribute represents what should be read on the file system -->
+	<!-- rotate can have 3 arguments: '0' (default) to tell there is no rotation. '1' to tell there are two possible rotations (vertical/horizontal) or
+	     '3' to tell there are four possible rotations (0 degree, 90 degrees, 180 degrees and 270 degrees) -->
+	<!-- Categories have a 'layer' attribute, which is to select where (in height) are placed the tiles. 'lowest' is where is ground is placed (room tiles),
+	     'lower' is where the room decorations are placed. 'middle' is where the doors are placed (because they can be at the same position as a room decoration/monster/item).
+	     'Finally, 'higher' is (at least for now) the highest level. There might be, later, a 'highest' layer. -->
+	<!-- File name conventions: A graphic file should be placed in the category's template, followed with item's template.
+	     Append to this the type template, then the rotation template (preceded with an underscore), IF you want an iconized version, add "_icon", and then, add ".png",
+	     and you have the final filename. Examples:
+	     monsters/trite_0.png
+	     monsters/trite_0_icon.png
+	     monsters/trite_blue_0.png
+	     monsters/trite_blue_0_icon.png,
+	     monsters/demon_blue_0.png,
+	     monsters/demon_blue_0_icon.png,
+	     monsters/demon_blue_1.png,
+	     rooms/cap_0.png,
+	     rooms/cap_0_icon.png,
+	     rooms/cap_1.png,
+	     rooms/cap_2.png,
+	     rooms/cap_3.png
+	     ...
+	     -->
+	<!-- A counter may appear for some items. This counter should be displayed to the tiles board, and decreased (or increased) when an item is placed (or removed). The counter
+	     should not be a limitation, but an indication. Should be displayed in red when below 0. -->
+	<!-- Order of items should also be respected, as they might help user when editing maps. -->
+	<category name="Monsters" template="monsters" layer="higher">
+		<item name="Trite" template="trite">
+			<type/> <!-- presence of an empty tag to generate the 'white' image. Won't appear for keys because there is no 'white' key -->
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+
+		<item name="Zombie" template="zombie">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+
+		<item name="Imp" template="imp">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+
+		<item name="Demon" template="demon" rotation="1">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+			
+		<item name="Mancubus" template="mancubus">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+
+		<item name="Hell Knight" template="hell_knight">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+
+		<item name="Archvile" template="archvile">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+
+		<item name="Cyber Demon" template="cyberdemon">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+	</category>
+
+	<category name="Inventory Items" template="objects" layer="higher">
+		<item name="Adreniline" template="adreniline"/>
+		<item name="Armor"      template="armor"/>
+		<item name="Berserk"    template="berserk"/>
+		<item name="Medpack"    template="medpack"/>
+		<item name="Key"        template="key">
+			<type name="Blue" template="_blue"/>
+			<type name="Yellow" template="_yellow"/>
+			<type name="Red" template="_red"/>
+		</item>
+	</category>
+
+	<category name="Players" template="players" layer="higher">
+		<item name="Player" template="marine">
+			<type/> <!-- Reserved for Hyacinthe -->
+			<type name="Blue" template="_blue"/>
+			<type name="Green" template="_green"/>
+			<type name="Red" template="_red"/>
+		</item>
+	</category>
+
+	<category name="Armory" template="weapons" layer="higher">
+		<item name="Bullets" template="bullets_ammo"/>
+		<item name="Cells" template="cells_ammo"/>
+		<item name="Rocket Ammo" template="rockets_ammo"/>
+		<item name="Chainsaw" template="chainsaw"/>
+		<item name="Machinegun" template="machinegun"/>
+		<item name="Shotgun" template="shotgun"/>
+		<item name="Chaingun" template="chaingun"/>
+		<item name="Rocket Launcher" template="rocketlauncher"/>
+		<item name="Plasma Gun" template="plasmagun"/>
+		<item name="BFG" template="BFG"/>
+	</category>
+
+	<category name="Doors" template="doors" layer="middle">
+		<item name="Door" template="door" rotation="1">
+			<type/>
+			<type name="Blue" template="_blue"/>
+			<type name="Yellow" template="_yellow"/>
+			<type name="Red" template="_red"/>
+			<type name="Broken" template="_broken"/>
+		</item>
+	</category>
+
+	<category name="Room Decorations" template="room_misc" layer="lower">
+		<item name="Barrel" template="1x1_barrel"/>
+		<item name="Clue" template="1x1_clue"/>
+		<item name="Compass Rose" template="1x1_compass_rose"/>
+		<item name="Conduct" template="1x1_duct"/>
+		<item name="Marker" template="1x1_marker"/>
+		<item name="Teleporter" template="1x1_teleporter">
+			<type name="Blue" template="_blue"/>
+			<type name="Yellow" template="_yellow"/>
+			<type name="Red" template="_red"/>
+		</item>
+		<item name="Body" template="1x2_body" rotation="1"/>
+		<item name="Goo" template="1x2_goo" rotation="1"/>
+		<item name="Obstacle" template="1x1_obstacle"/>
+		<item name="Obstacle" template="1x2_obstacle" rotation="1"/>
+		<item name="Obstable" template="1x3_obstacle" rotation="1"/>
+	</category>
+
+	<category name="Rooms" template="rooms" layer="lowest">
+		<item name="Small Hallway"   template="2x3_hallway"    rotation="1" counter="10" />
+		<item name="Big Hallway"     template="2x6_hallway"    rotation="1" counter="4"  />
+		<item name="Cap"             template="cap"            rotation="3" counter="22" />
+		<item name="T Intersection"  template="T_intersection" rotation="3" counter="4"  />
+		<item name="X Intersection"  template="X_intersection" rotation="0" counter="2"  />
+		<item name="L Hallway"       template="L_hallway"      rotation="3" counter="3"  />
+		<item name="Large L Hallway" template="LargeL_hallway" rotation="3" counter="2"  />
+		<item name="4x4 Room"        template="4x4_room"       rotation="0" counter="5"  />
+		<item name="5x5 Room"        template="5x5_room"       rotation="0" counter="3"  />
+		<item name="9x10 Room"       template="9x10_room"      rotation="3" counter="1"  />
+		<item name="9x5 Room"        template="9x5_room"       rotation="3" counter="1"  />
+		<item name="5x10 Room"       template="5x10_room"      rotation="3" counter="1"  />
+		<item name="10x5 Room"       template="10x5_room"      rotation="3" counter="1"  />
+	</category>
+</elements>
+
