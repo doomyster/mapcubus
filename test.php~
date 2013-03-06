@@ -53,7 +53,7 @@
 }
 
 .categorie_menu {
-  width: 250px;
+  width: 300px;
 }
 
 .element_menu {
