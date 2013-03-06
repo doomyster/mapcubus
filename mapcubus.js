@@ -51,10 +51,8 @@ $(document).ready(function() {
       }
   });
 
-  $("#navigation").menu();
-  /*
+  //$("#navigation").menu();
   $("#accordeon").accordion({
   	collapsible: true
   });
-  */
 });

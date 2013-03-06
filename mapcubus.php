@@ -122,48 +122,30 @@ function ScanXmlData($data) {
   } // End of: iterate root's children
 
   $pieces = '';
-  foreach ($categories as $blob) {
-	$pieces .= '<li><a href="#">' . $blob->name . '</a>';
-	$pieces .= '<ul class="categorie_menu">';
+  foreach ($categories as $cat) {
+	$pieces .= '<h3><a href="#">' . $cat->name . '</a></h3>';
+	$pieces .= '<div><p>';
 
-	foreach($blob->items as $i) {
+	foreach($cat->items as $i) {
 		$imgs = $i->getFiles();
-
-		$pieces .= '<li class="element_menu">';
+		$counter = 0;
 		foreach ($imgs as $im) {
-		$size = getimagesize('http://localhost/mapcubus/tiles/'.$blob->template.'/'.$im);
-		$pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://localhost/mapcubus/tiles/' . $blob->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $blob->template . '/' . $im . '"/>' . $i->name.'</span>';
+			$size = getimagesize('http://localhost/mapcubus/tiles/'.$cat->template.'/'.$im);
+			$pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://localhost/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
+			if ($counter == 1) {
+				$counter = -1;
+				$pieces .= '<br>';
+			}
+			$counter++;
 		}
 		$pieces .= '<hr />';
-		$pieces .= '</li>';
 	}
 
-	$pieces .= '</ul>';
+	$pieces .= '</p></div>';
   }
   return $pieces;
 }
 
-function ScanDirectory($dossier) {
-  $elements_dossiers = opendir($dossier);
-  $pieces = '';
-  while(false !== ($entree = @readdir($elements_dossiers))) {
-	if(is_dir($dossier.'/'.$entree)&& $entree != '.' && $entree != '..') {
-		  $pieces .= '<li><a href="#">'.genererTitreSection($entree).'</a>';
-		  $pieces .= '<ul>';
-		  $pieces .= ScanDirectory($dossier.'/'.$entree);
-		  $pieces .= '</ul></li>';
-	}
-	else {
-	  if($entree != '.' && $entree != '..') {
-		$pieces .= '<li class="element_menu"><img class="illustration_menu draggable" data-source="'+genererCheminImage($dossier.'/'.$entree)+'" src="'.genererCheminMiniature($dossier.'/'.$entree).'" />'.$entree.'</li>';
-	  }
-	}
-    closedir($dossier);
-  }
-  return $pieces;
-}
-
-#$liste = ScanDirectory('/var/www/mapcubus/sorted');
 $liste = ScanXmlData("./data.xml");
 
 function genererGrille()

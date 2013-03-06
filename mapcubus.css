@@ -32,17 +32,15 @@
 }
 
 .feuille_menu {
-    display: inline-block;
-    height: 70px;
-    padding: 5px;
-    width: 70px;
+    padding: 0px;
+    width: 130px;
 }
 
 .illustration_menu {
   #max-height : 70px;
 }
 
-#navigation {
+#accordeon {
   float: left;
   position: fixed;
   border: 1px solid black;
