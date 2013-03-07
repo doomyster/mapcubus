@@ -15,15 +15,15 @@ function highlightArea(xy, lh) {
   }
 }
 
-function commitDistant() {
+function commitDistant(levelName) {
 	commitLocal();
-	$.post('server.php','level_name=test&'+'level_content='+JSON.stringify(elementsArray), function(data) {
+	$.post('server.php','level_name='+levelName+'&'+'level_content='+JSON.stringify(elementsArray), function(data) {
 		window.alert("level saved successfully !");
 	});	
 }
 
-function revertDistant() {
-	$.get('server.php', function(data) {
+function revertDistant(levelName) {
+	$.get('server.php?level_name='+levelName, function(data) {
 		elementsArray = data;
 		revertLocal();
 	});	
@@ -68,6 +68,54 @@ function createLevelElement(typeTpl, itemTpl, imgSrc) {
 	return img;
 }
 
+function createSaveForm() {
+	$("#save_form").dialog({
+	  autoOpen: false,
+	  height: 300,
+	  width: 350,
+	  modal: true,
+	  buttons: {
+	    "Save Level": function() {
+		commitDistant($('#level_name_save').val());
+		$( this ).dialog( "close" );
+	    },
+	    Cancel: function() {
+		$( this ).dialog( "close" );
+	    }
+	  },
+	  close: function() {
+	  }
+	});
+	
+	$("#commit-distant").click(function() {
+	  $("#save_form").dialog("open");
+	});
+}
+
+function createLoadForm() {
+	$("#load_form").dialog({
+	  autoOpen: false,
+	  height: 300,
+	  width: 350,
+	  modal: true,
+	  buttons: {
+	    "Load Level": function() {
+		revertDistant($('#level_name_load').val());
+		$(this).dialog( "close" );
+	    },
+	    Cancel: function() {
+		$(this).dialog( "close" );
+	    }
+	  },
+	  close: function() {
+	  }
+	});
+	
+	$("#revert-distant").click(function() {
+	  $("#load_form").dialog("open");
+	});	
+}
+
 $(document).ready(function() {
   $(".draggable").draggable(
   {
@@ -110,13 +158,15 @@ $(document).ready(function() {
   	collapsible: true
   });
   
-  $("#commit-distant").click(function() {
+  createSaveForm();
+  createLoadForm();
+  /*$("#commit-distant").click(function() {
     commitDistant();
-  });
+  });*/
   
-  $("#revert-distant").click(function() {
+  /*$("#revert-distant").click(function() {
     revertDistant();
-  });
+  });*/
     
   $("#commit-local").click(function() {
     commitLocal();

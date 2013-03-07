@@ -93,3 +93,18 @@ background-color:#FFD700;
 -webkit-border-radius: 5px;
 }
 
+label, input { display:block; }
+input.text { margin-bottom:12px; width:95%; padding: .4em; }
+fieldset { padding:0; border:0; margin-top:25px; }
+
+.ui-dialog {
+	position: fixed !important;
+	top: 100px !important;
+	left: 50% !important;
+}
+
+.ui-dialog {
+	position: fixed !important;
+	top: 100px !important;
+	left: 50% !important;
+}

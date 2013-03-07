@@ -9,6 +9,18 @@
     </head>
 
     <body>
+	<form id="save_form">
+		<fieldset>
+			<label for="name">Level name</label>
+			<input type="text" name="level_name_save" id="level_name_save" class="text ui-widget-content ui-corner-all" />
+		</fieldset>
+	</form>
+	<form id="load_form">
+		<fieldset>
+			<label for="name">Level name</label>
+			<input type="text" name="level_name_load" id="level_name_load" class="text ui-widget-content ui-corner-all" />
+		</fieldset>
+	</form>
 	<input type="button" title="save changes on server" id="commit-distant" value="Save" />
 	<input type="button" title="load map from server" id="revert-distant" value="Load" />
 	<input type="button" title="save changes locally" id="commit-local" value="Commit" />
