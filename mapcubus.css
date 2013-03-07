@@ -54,6 +54,20 @@
     padding-left: 350px;
 }
 
+#commit-local {
+    left: 8px;
+    position: fixed;
+    top: 335px;
+    z-index: 2000;
+}
+
+#revert-local {
+    left: 90px;
+    position: fixed;
+    top: 335px;
+    z-index: 2000;
+}
+
 .level-element {
     position: absolute;
     float:left;

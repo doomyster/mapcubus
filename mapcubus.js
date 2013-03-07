@@ -1,3 +1,5 @@
+var elementsArray = new Array();
+
 function convertIdToXy(id) {
   var tab = id.split('-');
   return new Array(parseInt(tab[1]), parseInt(tab[2]));
@@ -13,6 +15,45 @@ function highlightArea(xy, lh) {
   }
 }
 
+function commitLocal() {
+	$('.level-element').each(function() {
+	      var element = {
+		type: $(this).attr("data-type-template"),
+		item: $(this).attr("data-item-template"),
+		coordsId: $(this).parent().attr("id")
+	      }
+	      elementsArray.push(element);
+	});
+}
+
+function revertLocal() {
+	clearAllLevelElements();
+	for (var i = 0; i < elementsArray.length; i++) {
+	  currentItem = elementsArray[i];
+     var imgSrc = getImgSrc(currentItem.type, currentItem.item);
+	  var img = createLevelElement(currentItem.type, currentItem.item, imgSrc);
+	  $('#'+currentItem.coordsId).append(img);
+	  img.draggable(
+	  {
+		revert: false,
+		helper: "original"
+      });   
+	}
+}
+
+function clearAllLevelElements() {
+	$('.level-element').remove();
+}
+
+function getImgSrc(typeTpl, itemTpl) {
+    return "http://localhost/mapcubus/tiles/"+itemTpl+"/"+typeTpl;
+}
+
+function createLevelElement(typeTpl, itemTpl, imgSrc) {
+	var img = $('<img class="level-element draggable-element" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc.replace('tiles','icons')+'" src="'+imgSrc+'" />');
+	return img;
+}
+
 $(document).ready(function() {
   $(".draggable").draggable(
   {
@@ -26,7 +67,9 @@ $(document).ready(function() {
   $(".drop-target").droppable({
      drop: function( event, ui ) {
 	  var imgSrc = $(ui.draggable).attr("data-source");
-	  var img = $('<img class="level-element draggable-element" data-source="'+imgSrc.replace('tiles','icons')+'" src="'+imgSrc+'" />');
+	  var itemTpl = $(ui.draggable).attr("data-item-template");
+	  var typeTpl = $(ui.draggable).attr("data-type-template");
+	  var img = createLevelElement(typeTpl, itemTpl, imgSrc);
 	  $(this).append(img);
 	  img.draggable(
 	  {
@@ -52,5 +95,12 @@ $(document).ready(function() {
 
   $("#accordeon").accordion({
   	collapsible: true
+  });
+  
+  $("#commit-local").click(function() {
+    commitLocal();
+  });
+  $("#revert-local").click(function() {
+    revertLocal();
   });
 });

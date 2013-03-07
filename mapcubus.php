@@ -120,7 +120,6 @@ function ScanXmlData($data) {
 		$categories[] = $cat;
 	} // End of: element is 'category'
   } // End of: iterate root's children
-
   $pieces = '';
   foreach ($categories as $cat) {
 	$pieces .= '<h3><a href="#">' . $cat->name . '</a></h3>';
@@ -131,7 +130,7 @@ function ScanXmlData($data) {
 		$counter = 0;
 		foreach ($imgs as $im) {
 			$size = getimagesize('http://localhost/mapcubus/tiles/'.$cat->template.'/'.$im);
-			$pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://localhost/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
+			$pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://localhost/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
 			if ($counter == 1) {
 				$counter = -1;
 				$pieces .= '<br>';
