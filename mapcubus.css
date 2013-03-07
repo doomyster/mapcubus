@@ -47,6 +47,7 @@
   margin-right: 10px;
   z-index: 2500;
   width: 340px;
+  top: 40px;
 }
 
 #contenu {
@@ -57,14 +58,12 @@
 #commit-local {
     left: 8px;
     position: fixed;
-    top: 335px;
     z-index: 2000;
 }
 
 #revert-local {
     left: 90px;
     position: fixed;
-    top: 335px;
     z-index: 2000;
 }
 
