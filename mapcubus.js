@@ -40,9 +40,8 @@ $(document).ready(function() {
 	  // Récupération des coordonnées de la cellule
 	  var xy = convertIdToXy($(this).attr("id"));
 	  //TODO: insérer la place en case dans le xml dans les attributs data-x et data-y, la récupérer ici pour alimenter la fonction highlightArea
-          // Attention aux rotations
+     // Attention aux rotations
 	  var lh = new Array(parseInt($(ui.draggable).attr("data-x")),parseInt($(ui.draggable).attr("data-y")));
-	  console.log($(ui.draggable).attr("data-x"));
 	  highlightArea(xy,lh);
 	  $(this).addClass('highlight-yellow');
       },
@@ -51,7 +50,6 @@ $(document).ready(function() {
       }
   });
 
-  //$("#navigation").menu();
   $("#accordeon").accordion({
   	collapsible: true
   });
