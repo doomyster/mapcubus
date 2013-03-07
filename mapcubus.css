@@ -23,7 +23,7 @@
 }
 
 .categorie_menu {
-  width: 350px;
+  max-height: 450px;
 }
 
 .element_menu {
@@ -46,6 +46,7 @@
   border: 1px solid black;
   margin-right: 10px;
   z-index: 2500;
+  width: 340px;
 }
 
 #contenu {

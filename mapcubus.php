@@ -124,7 +124,7 @@ function ScanXmlData($data) {
   $pieces = '';
   foreach ($categories as $cat) {
 	$pieces .= '<h3><a href="#">' . $cat->name . '</a></h3>';
-	$pieces .= '<div><p>';
+	$pieces .= '<div class="categorie_menu"><p>';
 
 	foreach($cat->items as $i) {
 		$imgs = $i->getFiles();
