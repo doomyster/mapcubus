@@ -15,6 +15,26 @@ function highlightArea(xy, lh) {
   }
 }
 
+function allElementsMove(xdir, ydir) {
+	$('.level-element').each(function() {
+		var xy_coords = convertIdToXy($(this).parent().attr("id"));
+		var x = xy_coords[0];
+		var y = xy_coords[1];
+		x += xdir;
+		y += ydir;
+
+		// Should also test for overflow
+		if (x < 0 || y < 0) { 
+			$(this).remove();
+		}
+		else {
+			var newid = "c-" + x + "-" + y;
+			document.getElementById(newid).appendChild(this);
+		}
+	});
+}
+
+
 function commitDistant(levelName) {
 	commitLocal();
 	$.post('server.php','level_name='+levelName+'&'+'level_content='+JSON.stringify(elementsArray), function(data) {
@@ -30,6 +50,7 @@ function revertDistant(levelName) {
 }
 
 function commitLocal() {
+	elementsArray = new Array(); // Of course, we need to erase all before filling it again !
 	$('.level-element').each(function() {
 	      var element = {
 		type: $(this).attr("data-type-template"),
@@ -174,4 +195,18 @@ $(document).ready(function() {
   $("#revert-local").click(function() {
     revertLocal();
   });
+
+  $("#all-move-left").click(function() {
+    allElementsMove(-1, 0);
+  });
+  $("#all-move-up").click(function() {
+    allElementsMove(0, -1);
+  });
+  $("#all-move-down").click(function() {
+    allElementsMove(0, 1);
+  });
+  $("#all-move-right").click(function() {
+    allElementsMove(1, 0);
+  });
+
 });

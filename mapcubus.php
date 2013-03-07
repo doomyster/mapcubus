@@ -150,10 +150,10 @@ $liste = ScanXmlData("./data.xml");
 function genererGrille()
 {
 	$grille = "";
-	for ($i=0; $i < 32; $i++)
+	for ($i=0; $i < 64; $i++)
 	{
 		$grille .= '<div class="ligne">';
-		for ($j=0; $j < 32; $j++)
+		for ($j=0; $j < 64; $j++)
 		{
 			$grille .= '<div id="c-'.$j.'-'.$i.'"';
 			$grille .= ' class="cellule drop-target" >';

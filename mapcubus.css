@@ -2,7 +2,7 @@
 {
   overflow: scroll;
   table-layout: fixed;
-  width: 2048px;
+  width: 4160;
 }
 
 .ligne {
@@ -47,7 +47,7 @@
   margin-right: 10px;
   z-index: 2500;
   width: 340px;
-  top: 40px;
+  top: 80px;
 }
 
 #contenu {
@@ -78,6 +78,36 @@
     position: fixed;
     z-index: 2000;
 }
+
+#all-move-left {
+    left: 8px;
+    top: 40px;
+    position: fixed;
+    z-index: 2000;
+}
+
+#all-move-up {
+    left: 90px;
+    top: 40px;
+    position: fixed;
+    z-index: 2000;
+}
+
+#all-move-down {
+    left: 172px;
+    top: 40px;
+    position: fixed;
+    z-index: 2000;
+}
+
+#all-move-right {
+    left: 254px;
+    top: 40px;
+    position: fixed;
+    z-index: 2000;
+}
+
+
 
 .level-element {
     position: absolute;
