@@ -60,8 +60,7 @@ $(document).ready(function() {
 	  revert: false, 
 	  helper: "clone",
 	  scroll: false,
-	  zIndex: 3200,
-	  refreshPositions: true
+	  zIndex: 3200
   });
 	  	
   $(".drop-target").droppable({
