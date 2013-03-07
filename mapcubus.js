@@ -15,6 +15,20 @@ function highlightArea(xy, lh) {
   }
 }
 
+function commitDistant() {
+	commitLocal();
+	$.post('server.php','level_name=test&'+'level_content='+JSON.stringify(elementsArray), function(data) {
+		window.alert("level saved successfully !");
+	});	
+}
+
+function revertDistant() {
+	$.get('server.php', function(data) {
+		elementsArray = data;
+		revertLocal();
+	});	
+}
+
 function commitLocal() {
 	$('.level-element').each(function() {
 	      var element = {
@@ -96,6 +110,14 @@ $(document).ready(function() {
   	collapsible: true
   });
   
+  $("#commit-distant").click(function() {
+    commitDistant();
+  });
+  
+  $("#revert-distant").click(function() {
+    revertDistant();
+  });
+    
   $("#commit-local").click(function() {
     commitLocal();
   });

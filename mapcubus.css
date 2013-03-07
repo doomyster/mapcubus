@@ -55,6 +55,18 @@
     padding-left: 350px;
 }
 
+#commit-distant {
+    left: 180px;
+    position: fixed;
+    z-index: 2000;
+}
+
+#revert-distant {
+    left: 240px;
+    position: fixed;
+    z-index: 2000;
+}
+
 #commit-local {
     left: 8px;
     position: fixed;
