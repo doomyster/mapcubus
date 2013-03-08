@@ -125,15 +125,15 @@
     background-color:#6699FF;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    -moz-opacity:0.5;
-    opacity: 0.5;
-    filter:alpha(opacity=50);
+    -moz-opacity:0.8;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
 }
 
 .img-overlay {
-    -moz-opacity:0.5;
-    opacity: 0.5;
-    filter:alpha(opacity=50);
+    -moz-opacity:0.7;
+    opacity: 0.7;
+    filter:alpha(opacity=70);
 }
 
 label, input { display:block; }

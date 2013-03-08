@@ -10,10 +10,10 @@ function highlightArea(xy, lh, image) {
     var distY = xy[1]+lh[1];
     for(var i = xy[0]; i < distX; i++) {
         for(var j = xy[1]; j < distY; j++) {
+        	   // color only edges of the area, the loop has to be changed, it is waayyyy to 
+        	   // complicated now
         		if(i == xy[0] || i == distX -1 || j == xy[1] || j == distY - 1) {
         			$('#c-'+i+'-'+j).addClass('highlight-yellow');
-        		} else {
-        			$('#c-'+i+'-'+j).addClass('highlight-blue');
         		}
         }
     }
