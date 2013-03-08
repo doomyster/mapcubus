@@ -27,10 +27,10 @@
         </form>
 
         <div>
-            <input type="button" title="save changes on server" id="commit-distant" value="Save" />
+            <input type="button" title="save map on server" id="commit-distant" value="Save" />
             <input type="button" title="load map from server" id="revert-distant" value="Load" />
             <input type="button" title="save changes locally" id="commit-local" value="Commit" />
-            <input type="button" title="save changes locally" id="revert-local" value="Revert" />
+            <input type="button" title="load last local save" id="revert-local" value="Revert" />
         </div>
         <div>
             <input type="button" title="moves all tiles to the left" id="all-move-left" value="<<" />
@@ -47,6 +47,10 @@
                 <?= $contenu; ?>
             </div>
         </div>
+
+	<div id="grid-options" class="ui-state-default">
+		<input type="checkbox" id="show-grid" name="show-grid" checked="checked" /><label id="show-grid-label" for="show-grid">show grid</label>
+	</div>
     </body>
 </html>
 

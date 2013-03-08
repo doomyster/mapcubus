@@ -17,6 +17,9 @@
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
+}
+
+.grid-border {
     border:1px solid red;
 }
 
@@ -36,6 +39,24 @@
 
 .illustration_menu {
     #max-height : 70px;
+}
+
+#grid-options {
+    border: 1px solid black;
+    float: left;
+    margin-right: 10px;
+    position: fixed;
+    top: 410px;
+    width: 340px;
+    z-index: 2400;
+    padding: 10px 0;
+}
+
+#show-grid-label, #show-grid {
+	display: inline;
+	padding: 8px;
+	font-weight: bold;
+	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
 }
 
 #accordeon {

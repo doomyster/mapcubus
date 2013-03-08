@@ -150,7 +150,7 @@ function genererGrille() {
         $grille .= '<div class="ligne">';
         for ($j=0; $j < 64; $j++) {
             $grille .= '<div id="c-'.$j.'-'.$i.'"';
-            $grille .= ' class="cellule drop-target" >';
+            $grille .= ' class="cellule grid-border drop-target" >';
             $grille .= "</div>";
         }
         $grille .= "</div>";

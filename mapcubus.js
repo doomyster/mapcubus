@@ -232,4 +232,8 @@ $(document).ready(function() {
     $("#all-move-right").click(function() {
         allElementsMove(1, 0);
     });
+    
+    $('#show-grid').change(function() {
+    	  $(".cellule").toggleClass('grid-border');
+    });
 });
