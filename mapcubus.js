@@ -5,14 +5,28 @@ function convertIdToXy(id) {
     return new Array(parseInt(tab[1]), parseInt(tab[2]));
 }
 
-function highlightArea(xy, lh) {
+function highlightArea(xy, lh, image) {
     var distX = xy[0]+lh[0];
     var distY = xy[1]+lh[1];
     for(var i = xy[0]; i < distX; i++) {
         for(var j = xy[1]; j < distY; j++) {
-            $('#c-'+i+'-'+j).addClass('highlight-yellow');
+        		if(i == xy[0] || i == distX -1 || j == xy[1] || j == distY - 1) {
+        			$('#c-'+i+'-'+j).addClass('highlight-yellow');
+        		} else {
+        			$('#c-'+i+'-'+j).addClass('highlight-blue');
+        		}
         }
     }
+    addImgOverlay($('#c-'+xy[0]+'-'+xy[1]), image);
+    
+}
+
+function addImgOverlay(cellId, imageUrl) {
+	$(cellId).append('<img class="img-overlay" src="'+imageUrl+'" />');	
+}
+
+function removeImgOverlay(cellId) {
+	$(cellId).children('.img-overlay').remove();	
 }
 
 function allElementsMove(xdir, ydir) {
@@ -175,17 +189,20 @@ $(document).ready(function() {
                 helper: "original"
             });
             $(".drop-target").removeClass('highlight-yellow');
+            $(".drop-target").removeClass('highlight-blue');
         },
         over: function(event, ui) {
             $(".drop-target").removeClass('highlight-yellow');
             // Récupération des coordonnées de la cellule
             var xy = convertIdToXy($(this).attr("id"));
             var lh = new Array(parseInt($(ui.draggable).attr("data-x")),parseInt($(ui.draggable).attr("data-y")));
-            highlightArea(xy,lh);
+            highlightArea(xy,lh, $(ui.draggable).attr("data-source"));
             $(this).addClass('highlight-yellow');
         },
         out: function(event, ui) {
+        		removeImgOverlay('#'+$(this).attr("id"));
             $(".drop-target").removeClass('highlight-yellow');
+            $(".drop-target").removeClass('highlight-blue');
         }
     });
 

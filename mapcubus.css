@@ -105,9 +105,7 @@
     z-index: 2000;
 }
 
-
-
-.level-element {
+.level-element, .img-overlay {
     position: absolute;
     float:left;
     top: 0px;
@@ -118,6 +116,24 @@
     background-color:#FFD700;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -moz-opacity:0.5;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+
+.highlight-blue {
+    background-color:#6699FF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-opacity:0.5;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+
+.img-overlay {
+    -moz-opacity:0.5;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
 }
 
 label, input { display:block; }
