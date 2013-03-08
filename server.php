@@ -24,6 +24,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		echo json_encode($levels);
 		exit;
 
+      } else if(isset($_GET['action']) && $_GET['action'] == 'exportLevelToPng') {
+		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'test');
+		chdir("utilities");
+		header('Content-Type: image/png');
+		system("./phantomjs exportpng.js "+$file_name);
+		echo file_get_contents('temp.png');
+		exit;
       } else {
 		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'test');
 		$file_content = file_get_contents('maps/'.$file_name.'.json');
@@ -33,4 +40,4 @@ switch ($_SERVER['REQUEST_METHOD']) {
       }
   break;
 }
-?> 
+?>
