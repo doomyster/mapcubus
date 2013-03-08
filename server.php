@@ -25,7 +25,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		exit;
 
       } else if(isset($_GET['action']) && $_GET['action'] == 'exportLevelToPng') {
-		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'test');
+		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'temp');
 		chdir("utilities");
 		header('Content-Type: image/png');
 		system("./phantomjs exportpng.js "+$file_name);
