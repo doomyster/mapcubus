@@ -29,7 +29,7 @@ function allElementsMove(xdir, ydir) {
         }
         else {
             var newid = "c-" + x + "-" + y;
-            document.getElementById(newid).appendChild(this);
+            $('#'+newid).append($(this));
         }
     });
 }
@@ -73,6 +73,26 @@ function revertLocal() {
             helper: "original"
         });   
     }
+}
+
+function fetchMapListFromServer() {
+	$.get('server.php?action=getLevelsList', function(data) {
+        levels = data;
+        $('#levels_load_list').html("");
+        $.each(data, function(i, item) {
+        		var levelItem = '<li data-level="'+item+'" class="level_load_element ui-widget-content">'+item+'</li>';
+        		$('#levels_load_list').append(levelItem);
+        });
+        $('#levels_load_list').selectable({
+   			selected: function(event, ui) {
+						selectLevel($(ui.selected).attr("data-level"));   			
+   			}
+		  });
+   });	
+}
+
+function selectLevel(level) {
+	$('#level_name_load').val(level);
 }
 
 function clearAllLevelElements() {
@@ -131,6 +151,7 @@ function createLoadForm() {
 
     $("#revert-distant").click(function() {
         $("#load_form").dialog("open");
+        fetchMapListFromServer();
     });	
 }
 
@@ -159,8 +180,6 @@ $(document).ready(function() {
             $(".drop-target").removeClass('highlight-yellow');
             // Récupération des coordonnées de la cellule
             var xy = convertIdToXy($(this).attr("id"));
-            //TODO: insérer la place en case dans le xml dans les attributs data-x et data-y, la récupérer ici pour alimenter la fonction highlightArea
-            // Attention aux rotations
             var lh = new Array(parseInt($(ui.draggable).attr("data-x")),parseInt($(ui.draggable).attr("data-y")));
             highlightArea(xy,lh);
             $(this).addClass('highlight-yellow');
@@ -176,13 +195,6 @@ $(document).ready(function() {
 
     createSaveForm();
     createLoadForm();
-    /*$("#commit-distant").click(function() {
-        commitDistant();
-    });*/
-
-    /*$("#revert-distant").click(function() {
-        revertDistant();
-    });*/
 
     $("#commit-local").click(function() {
         commitLocal();

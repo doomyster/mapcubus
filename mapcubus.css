@@ -135,3 +135,8 @@ fieldset { padding:0; border:0; margin-top:25px; }
     top: 100px !important;
     left: 50% !important;
 }
+
+#levels_load_list .ui-selecting { background: #FECA40; }
+#levels_load_list .ui-selected { background: #F39814; color: white; }
+#levels_load_list { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#levels_load_list li { margin: 3px; padding: 0.2em; font-size: 1.1em;}
