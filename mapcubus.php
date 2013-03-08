@@ -1,13 +1,5 @@
 <?php 
 
-function genererCheminImage($chemin) {
-  return str_replace('/var/www/', 'http://localhost/', $chemin);
-}
-
-function genererCheminMiniature($chemin) {
-  return str_replace('tiles','icons',str_replace('/var/www/', 'http://localhost/', $chemin));
-}
-
 function genererTitreSection($chemin) {
   $parties = explode("/", $chemin);	
   return $parties[count($parties) - 1];
@@ -126,8 +118,8 @@ function ScanXmlData($data) {
             $imgs = $i->getFiles();
             $counter = 0;
             foreach ($imgs as $im) {
-                $size = getimagesize('http://localhost/mapcubus/tiles/'.$cat->template.'/'.$im);
-                $pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://localhost/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://localhost/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
+                $size = getimagesize('http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/'.$cat->template.'/'.$im);
+                $pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
                 if ($counter == 1) {
                     $counter = -1;
                     $pieces .= '<br>';
