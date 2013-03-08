@@ -58,6 +58,7 @@ function commitDistant(levelName) {
 
 function revertDistant(levelName) {
     $.get('server.php?level_name='+levelName, function(data) {
+    	  clearAllLevelElements();
         elementsArray = data;
         revertLocal();
     });	
