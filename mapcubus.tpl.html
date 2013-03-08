@@ -9,31 +9,31 @@
     </head>
 
     <body>
-	<form id="save_form">
-		<fieldset>
-			<label for="name">Level name</label>
-			<input type="text" name="level_name_save" id="level_name_save" class="text ui-widget-content ui-corner-all" />
-		</fieldset>
-	</form>
-	<form id="load_form">
-		<fieldset>
-			<label for="name">Level name</label>
-			<input type="text" name="level_name_load" id="level_name_load" class="text ui-widget-content ui-corner-all" />
-		</fieldset>
-	</form>
+        <form id="save_form">
+            <fieldset>
+                <label for="name">Level name</label>
+                <input type="text" name="level_name_save" id="level_name_save" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
+        <form id="load_form">
+            <fieldset>
+                <label for="name">Level name</label>
+                <input type="text" name="level_name_load" id="level_name_load" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
 
-	<div>
-	    <input type="button" title="save changes on server" id="commit-distant" value="Save" />
-	    <input type="button" title="load map from server" id="revert-distant" value="Load" />
-	    <input type="button" title="save changes locally" id="commit-local" value="Commit" />
-	    <input type="button" title="save changes locally" id="revert-local" value="Revert" />
-	</div>
-	<div>
-	    <input type="button" title="moves all tiles to the left" id="all-move-left" value="<<" />
-	    <input type="button" title="moves all tiles upward" id="all-move-up" value="^" />
-	    <input type="button" title="moves all tiles downward" id="all-move-down" value="V" />
-	    <input type="button" title="moves all tiles to the right" id="all-move-right" value=">>" />
-	</div>
+        <div>
+            <input type="button" title="save changes on server" id="commit-distant" value="Save" />
+            <input type="button" title="load map from server" id="revert-distant" value="Load" />
+            <input type="button" title="save changes locally" id="commit-local" value="Commit" />
+            <input type="button" title="save changes locally" id="revert-local" value="Revert" />
+        </div>
+        <div>
+            <input type="button" title="moves all tiles to the left" id="all-move-left" value="<<" />
+            <input type="button" title="moves all tiles upward" id="all-move-up" value="^" />
+            <input type="button" title="moves all tiles downward" id="all-move-down" value="V" />
+            <input type="button" title="moves all tiles to the right" id="all-move-right" value=">>" />
+        </div>
 
         <div id="accordeon">
             <?= $liste; ?>
