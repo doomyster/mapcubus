@@ -180,6 +180,7 @@ $(document).ready(function() {
 
     $(".drop-target").droppable({
         drop: function( event, ui ) {
+            removeImgOverlay('#'+$(this).attr("id"));
             var imgSrc = $(ui.draggable).attr("data-source");
             var itemTpl = $(ui.draggable).attr("data-item-template");
             var typeTpl = $(ui.draggable).attr("data-type-template");
