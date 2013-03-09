@@ -6,7 +6,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
       $file_content = $_POST['level_content'];
       $file_name =  $_POST['level_name'];
       $success = file_put_contents('maps/'.$file_name.'.json', $file_content);
-      echo 'ok';
+      if ($success === false) {
+          echo '<div id="result">fail</div>';
+      }
+      else {
+          echo '<div id="result">ok</div>';
+      }
   break;
   
   case 'GET':
