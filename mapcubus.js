@@ -1,4 +1,4 @@
-var elementsArray = new Array();
+var elementsArray = {};
 
 function convertIdToXy(id) {
     var tab = id.split('-');
@@ -58,35 +58,62 @@ function commitDistant(levelName) {
 
 function revertDistant(levelName) {
     $.get('server.php?level_name='+levelName, function(data) {
-    	  clearAllLevelElements();
+    	  //clearAllLevelElements(); Don't to it: it's the job of revertLocal() !!!
         elementsArray = data;
         revertLocal();
     });	
 }
 
 function commitLocal() {
-    elementsArray = new Array(); // Of course, we need to erase all before filling it again !
+    tilesArray = new Array();
+                          
     $('.level-element').each(function() {
         var element = {
             type: $(this).attr("data-type-template"),
             item: $(this).attr("data-item-template"),
             coordsId: $(this).parent().attr("id")
         }
-        elementsArray.push(element);
+        tilesArray.push(element);
     });
+
+    elementsArray = { info: { map: "mapcubus", fileVersion: "0.2" }, tiles: tilesArray };
 }
 
 function revertLocal() {
-    clearAllLevelElements();
-    for (var i = 0; i < elementsArray.length; i++) {
-        currentItem = elementsArray[i];
-        var imgSrc = getImgSrc(currentItem.type, currentItem.item);
-        var img = createLevelElement(currentItem.type, currentItem.item, imgSrc);
-        $('#'+currentItem.coordsId).append(img);
-        img.draggable({
-            revert: false,
-            helper: "original"
-        });   
+    // clearAllLevelElements() call moved not to clear all elements unless we know we can load the map
+
+    if (typeof(elementsArray.info) != "undefined" && typeof(elementsArray.info.fileVersion) != "undefined") {
+        fileVersion = elementsArray.info.fileVersion;
+	if (fileVersion == "0.2") {
+            clearAllLevelElements();
+	    for (var i = 0; i < elementsArray.tiles.length; i++) {
+		currentItem = elementsArray.tiles[i];
+		var imgSrc = getImgSrc(currentItem.type, currentItem.item);
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc);
+		$('#'+currentItem.coordsId).append(img);
+		img.draggable({
+		    revert: false,
+		    helper: "original"
+		});   
+            }
+	}
+	else {
+		//retrocompat.revertLocal(fileVersion, elementsArray);
+		alert("File version not supported");
+	}
+    }
+    else {
+            clearAllLevelElements();
+	    for (var i = 0; i < elementsArray.length; i++) {
+		currentItem = elementsArray[i];
+		var imgSrc = getImgSrc(currentItem.type, currentItem.item);
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc);
+		$('#'+currentItem.coordsId).append(img);
+		img.draggable({
+		    revert: false,
+		    helper: "original"
+		});   
+	    }
     }
 }
 
