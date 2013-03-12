@@ -1,4 +1,5 @@
 var elementsArray = {};
+var currentDropTarget = null;
 
 function convertIdToXy(id) {
     var tab = id.split('-');
@@ -197,7 +198,43 @@ function createLoadForm() {
     });	
 }
 
+function createContextMenu() {
+	$("#context-menu-options").menu();
+	$("#context-menu-options").hide();
+	$("#contenu").bind("contextmenu",function(e){
+		e.preventDefault();
+		$("#context-menu-options").css({
+      	left:  e.pageX,
+      	top:   e.pageY
+    	});
+    	$("#context-menu-options").show();
+	});
+	$("#delete-tile-link").click(function() {
+		deleteTile();
+		$("#context-menu-options").hide();
+	});
+	$(document).click(function(event) {
+		if (event.which != 3) {
+			if($("#context-menu-options").is(":visible")) {
+				$("#context-menu-options").hide();
+			}
+    	}
+
+	});
+}
+
+function deleteTile() {
+	if(currentDropTarget != null) {
+		elementToRemove = currentDropTarget.children(".level-element").last();
+		elementToRemove.remove();
+	}
+}
+
 $(document).ready(function() {
+    $(".drop-target").mouseover(function() {
+		currentDropTarget = $(this);
+    });
+	
     $(".draggable").draggable({
         revert: false, 
         helper: "clone",
@@ -241,6 +278,7 @@ $(document).ready(function() {
 
     createSaveForm();
     createLoadForm();
+    createContextMenu();
 
     $("#commit-local").click(function() {
         commitLocal();

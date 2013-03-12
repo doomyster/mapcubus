@@ -29,12 +29,28 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		echo json_encode($levels);
 		exit;
 
-      } else if(isset($_GET['action']) && $_GET['action'] == 'exportLevelToPng') {
+      } else if(isset($_GET['action']) && $_GET['action'] == 'exportLevel') {
 		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'temp');
+		$format = (isset($_GET['format']) ? $_GET['format'] : 'png');
 		chdir("utilities");
-		header('Content-Type: image/png');
-		system("./phantomjs exportpng.js "+$file_name);
-		echo file_get_contents('temp.png');
+		include('template.php');
+		if($format == "png") {
+		      system("./phantomjs exportpng.js ".$file_name);
+		      $exported_file = $file_name.'.png';
+		} else {
+		      $exported_file = $file_name.'_temp.html';
+		}
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/octet-stream');
+		header('Content-Disposition: attachment; filename='.basename($exported_file));
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($exported_file));
+		ob_clean();
+		flush();
+		readfile($exported_file);
 		exit;
       } else {
 		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'test');

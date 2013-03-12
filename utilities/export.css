@@ -1,7 +1,7 @@
 .scr {
-    overflow: scroll;
+    overflow: visible;
     table-layout: fixed;
-    width: 4160;
+    width: 4160px;
 }
 
 .ligne {
@@ -19,12 +19,12 @@
     -webkit-box-sizing:border-box;
 }
 
-.grid-border {
-    border:1px solid red;
-}
-
 .categorie_menu {
     max-height: 450px;
+}
+
+.grid-border {
+	border: none;
 }
 
 .element_menu {
@@ -71,7 +71,7 @@
 
 #contenu {
     float: left;
-    padding-left: 350px;
+    padding-left: 0px;
 }
 
 #commit-distant {
@@ -182,3 +182,4 @@ fieldset { padding:0; border:0; margin-top:25px; }
 #levels_load_list .ui-selected { background: #F39814; color: white; }
 #levels_load_list { list-style-type: none; margin: 0; padding: 0; width: 60%; }
 #levels_load_list li { margin: 3px; padding: 0.2em; font-size: 1.1em;}
+ 
