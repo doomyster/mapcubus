@@ -24,12 +24,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		echo json_encode($levels);
 		exit;
 
-      } else if(isset($_GET['action']) && $_GET['action'] == 'exportLevelToPng') {
+      } else if(isset($_GET['action']) && $_GET['action'] == 'exportLevel') {
 		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'temp');
+		$format = (isset($_GET['format']) ? $_GET['format'] : 'png');
 		chdir("utilities");
 		include('template.php');
-		system("./phantomjs exportpng.js ".$file_name);
-		$exported_file = $file_name.'.png';
+		if($format == "png") {
+		      system("./phantomjs exportpng.js ".$file_name);
+		      $exported_file = $file_name.'.png';
+		} else {
+		      $exported_file = $file_name.'_temp.html';
+		}
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
 		header('Content-Disposition: attachment; filename='.basename($exported_file));

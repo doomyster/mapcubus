@@ -43,5 +43,5 @@ ob_start();
 include('template.tpl.html');
 $sortie = ob_get_contents();
 @ob_end_clean();
-file_put_contents('/home/aurelien/web/mapcubus/utilities/'.$niveau.'_temp.html', $sortie);
+file_put_contents('/home/aurelien/web/mapcubus/utilities/'.$niveau.'.html', $sortie);
 ?>
