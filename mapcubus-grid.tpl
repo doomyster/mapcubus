@@ -1,3 +1,4 @@
+<div id="map-options">
         <form id="save_form">
             <fieldset>
                 <label for="name">Level name</label>
@@ -31,17 +32,18 @@
         <div id="accordeon">
             <?= $liste; ?>
         </div>
-        <div id="contenu">
-            <div class="scr">
-                <?= $contenu; ?>
-            </div>
-        </div>
+</div>
 
-	<div id="grid-options" class="ui-state-default">
-		<input type="checkbox" id="show-grid" name="show-grid" checked="checked" /><label id="show-grid-label" for="show-grid">show grid</label>
-	</div>
+<div id="contenu">
+    <div class="scr">
+	<?= $contenu; ?>
+    </div>
+</div>
 
-	<ul id="context-menu-options">
-	  <li><a id="delete-tile-link" href="#">Supprimer</a></li>
-	</ul>
+<div id="grid-options" class="ui-state-default ui-corner-all">
+	<input type="checkbox" id="show-grid" name="show-grid" checked="checked" /><label id="show-grid-label" for="show-grid">show grid</label>
+</div>
 
+<ul id="context-menu-options">
+  <li><a id="delete-tile-link" href="#">Supprimer</a></li>
+</ul>

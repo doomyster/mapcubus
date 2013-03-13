@@ -42,11 +42,10 @@
 }
 
 #grid-options {
-    border: 1px solid black;
     float: left;
     margin-right: 10px;
     position: fixed;
-    top: 410px;
+    top: 470px;
     width: 340px;
     z-index: 2400;
     padding: 10px 0;
@@ -62,11 +61,10 @@
 #accordeon {
     float: left;
     position: fixed;
-    border: 1px solid black;
     margin-right: 10px;
     z-index: 2500;
     width: 340px;
-    top: 140px;
+    top: 150px;
 }
 
 #contenu {
@@ -75,57 +73,57 @@
 }
 
 #commit-distant {
-    left: 180px;
-    top: 60px;
+    left: 210px;
+    top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
 #revert-distant {
-    left: 240px;
-    top: 60px;
+    left: 282px;
+    top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
 #commit-local {
-    left: 8px;
-    top: 60px;
+    left: 35px;
+    top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
 #revert-local {
-    left: 90px;
-    top: 60px;
+    left: 122px;
+    top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-left {
-    left: 8px;
-    top: 100px;
+    left: 35px;
+    top: 110px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-up {
-    left: 90px;
-    top: 100px;
+    left: 110px;
+    top: 110px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-down {
-    left: 172px;
-    top: 100px;
+    left: 202px;
+    top: 110px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-right {
-    left: 254px;
-    top: 100px;
+    left: 274px;
+    top: 110px;
     position: fixed;
     z-index: 2000;
 }
@@ -186,3 +184,7 @@ fieldset { padding:0; border:0; margin-top:25px; }
 #levels_load_list .ui-selected { background: #F39814; color: white; }
 #levels_load_list { list-style-type: none; margin: 0; padding: 0; width: 60%; }
 #levels_load_list li { margin: 3px; padding: 0.2em; font-size: 1.1em;}
+
+.level_load_element:hover {
+	cursor: pointer;
+}
