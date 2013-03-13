@@ -214,8 +214,8 @@ function createContextMenu() {
 	$("#contenu").bind("contextmenu",function(e){
 		e.preventDefault();
 		$("#context-menu-options").css({
-      	left:  e.pageX,
-      	top:   e.pageY
+		left:  e.pageX,
+		top:   e.pageY
     	});
     	$("#context-menu-options").show();
 	});
@@ -228,8 +228,7 @@ function createContextMenu() {
 			if($("#context-menu-options").is(":visible")) {
 				$("#context-menu-options").hide();
 			}
-    	}
-
+		}
 	});
 }
 
@@ -253,6 +252,24 @@ function setDraggable(levelElement) {
       });	
 }
 
+function createLevelElementFromDraggable(appendTarget, ui) {
+      if(ui.draggable.hasClass("level-element")) {
+	    var imgSrc = $(ui.draggable).attr("src");
+      } else {
+	    var imgSrc = $(ui.draggable).attr("data-source");
+      }
+      var itemTpl = $(ui.draggable).attr("data-item-template");
+      var typeTpl = $(ui.draggable).attr("data-type-template");
+      var dataX = $(ui.draggable).attr("data-x");
+      var dataY = $(ui.draggable).attr("data-y");
+      var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY);
+      appendTarget.append(img);
+      setDraggable(img);
+      if(ui.draggable.hasClass("level-element")) {
+	    ui.draggable.remove();
+      }
+}
+
 $(document).ready(function() {
     $(".drop-target").mouseover(function() {
 		if(currentDropTarget != null) {
@@ -272,21 +289,7 @@ $(document).ready(function() {
     $(".drop-target").droppable({
         drop: function( event, ui ) {
             removeImgOverlay('#'+$(this).attr("id"));
-            if(ui.draggable.hasClass("level-element")) {
-           		var imgSrc = $(ui.draggable).attr("src");
-            } else {
-            	var imgSrc = $(ui.draggable).attr("data-source");
-            }
-            var itemTpl = $(ui.draggable).attr("data-item-template");
-            var typeTpl = $(ui.draggable).attr("data-type-template");
-            var dataX = $(ui.draggable).attr("data-x");
-            var dataY = $(ui.draggable).attr("data-y");
-            var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY);
-            $(this).append(img);
-            setDraggable(img);
-            if(ui.draggable.hasClass("level-element")) {
-            	ui.draggable.remove();
-            }
+            createLevelElementFromDraggable($(this), ui);
             $(".drop-target").removeClass('highlight-yellow');
             $(".drop-target").removeClass('highlight-blue');
         },
