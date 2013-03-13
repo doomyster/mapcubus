@@ -1,5 +1,6 @@
 var elementsArray = {};
 var currentDropTarget = null;
+var currentZoneCounter = 0;
 
 function convertIdToXy(id) {
     var tab = id.split('-');
@@ -340,6 +341,7 @@ $(document).ready(function() {
     });
 
     $('#mapcubus-scenarii-button-add').click(function() {
-        $('#mapcubus-scenarii-zones').append('<div id="add-a-counter"><H2>Zone $counter</H2><textarea rows="10" cols="80"></textarea></div>');
+        $('#mapcubus-scenarii-zones').append('<div id="mapcubus-scenarii-zone-' + currentZoneCounter + '"><H2>Zone ' + currentZoneCounter + '</H2><textarea rows="10" cols="80"></textarea></div>');
+    	currentZoneCounter += 1;
     });
 });

@@ -66,7 +66,7 @@
     margin-right: 10px;
     z-index: 2500;
     width: 340px;
-    top: 80px;
+    top: 140px;
 }
 
 #contenu {
@@ -76,52 +76,56 @@
 
 #commit-distant {
     left: 180px;
+    top: 60px;
     position: fixed;
     z-index: 2000;
 }
 
 #revert-distant {
     left: 240px;
+    top: 60px;
     position: fixed;
     z-index: 2000;
 }
 
 #commit-local {
     left: 8px;
+    top: 60px;
     position: fixed;
     z-index: 2000;
 }
 
 #revert-local {
     left: 90px;
+    top: 60px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-left {
     left: 8px;
-    top: 40px;
+    top: 100px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-up {
     left: 90px;
-    top: 40px;
+    top: 100px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-down {
     left: 172px;
-    top: 40px;
+    top: 100px;
     position: fixed;
     z-index: 2000;
 }
 
 #all-move-right {
     left: 254px;
-    top: 40px;
+    top: 100px;
     position: fixed;
     z-index: 2000;
 }
