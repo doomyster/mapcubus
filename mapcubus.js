@@ -72,12 +72,22 @@ function commitLocal() {
         var element = {
             type: $(this).attr("data-type-template"),
             item: $(this).attr("data-item-template"),
+            dataX: $(this).attr("data-x"),
+            dataY: $(this).attr("data-y"),
             coordsId: $(this).parent().attr("id")
         }
         tilesArray.push(element);
     });
 
     elementsArray = { info: { map: "mapcubus", fileVersion: "0.2" }, tiles: tilesArray };
+}
+
+function fetchAttributesFromMenu(item) {
+	var tpl = $(".illustration_menu[data-type-template='"+item.type+"'][data-item-template='"+item.item+"']");
+	item.dataX = tpl.attr("data-x");
+	item.dataY = tpl.attr("data-y");
+	
+	return item;
 }
 
 function revertLocal() {
@@ -90,12 +100,12 @@ function revertLocal() {
 	    for (var i = 0; i < elementsArray.tiles.length; i++) {
 		currentItem = elementsArray.tiles[i];
 		var imgSrc = getImgSrc(currentItem.type, currentItem.item);
-		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc);
+		if(currentItem.dataX === undefined || currentItem.datay === undefined) {
+			currentItem = fetchAttributesFromMenu(currentItem);
+		}
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY);
 		$('#'+currentItem.coordsId).append(img);
-		img.draggable({
-		    revert: false,
-		    helper: "original"
-		});   
+		setDraggable(img);
             }
 	}
 	else {
@@ -108,12 +118,12 @@ function revertLocal() {
 	    for (var i = 0; i < elementsArray.length; i++) {
 		currentItem = elementsArray[i];
 		var imgSrc = getImgSrc(currentItem.type, currentItem.item);
-		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc);
+		if(currentItem.dataX === undefined || currentItem.datay === undefined) {
+			currentItem = fetchAttributesFromMenu(currentItem);
+		}
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY);
 		$('#'+currentItem.coordsId).append(img);
-		img.draggable({
-		    revert: false,
-		    helper: "original"
-		});   
+		setDraggable(img);
 	    }
     }
 }
@@ -146,8 +156,8 @@ function getImgSrc(typeTpl, itemTpl) {
     return "http://localhost/mapcubus/tiles/"+itemTpl+"/"+typeTpl;
 }
 
-function createLevelElement(typeTpl, itemTpl, imgSrc) {
-    var img = $('<img class="level-element draggable-element" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc.replace('tiles','icons')+'" src="'+imgSrc+'" />');
+function createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY) {
+    var img = $('<img class="level-element draggable-element" data-x="'+dataX+'" data-y="'+dataY+'" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc+'" src="'+imgSrc+'" />');
     return img;
 }
 
@@ -230,9 +240,26 @@ function deleteTile() {
 	}
 }
 
+function setDraggable(levelElement) {
+      levelElement.draggable({
+		revert: false, 
+		helper: function(event) {
+			var res = $(this).clone();
+			res.attr("src",$(this).attr("data-source").replace('tiles', 'icons'));
+			return res;
+		},
+		scroll: false,
+		zIndex: 3200
+      });	
+}
+
 $(document).ready(function() {
     $(".drop-target").mouseover(function() {
-		currentDropTarget = $(this);
+		if(currentDropTarget != null) {
+		      currentDropTarget.children('.level-element').removeClass("highlight-yellow");
+		}
+		currentDropTarget = $(this);	
+		$(this).children('.level-element').addClass("highlight-yellow");
     });
 	
     $(".draggable").draggable({
@@ -245,15 +272,21 @@ $(document).ready(function() {
     $(".drop-target").droppable({
         drop: function( event, ui ) {
             removeImgOverlay('#'+$(this).attr("id"));
-            var imgSrc = $(ui.draggable).attr("data-source");
+            if(ui.draggable.hasClass("level-element")) {
+           		var imgSrc = $(ui.draggable).attr("src");
+            } else {
+            	var imgSrc = $(ui.draggable).attr("data-source");
+            }
             var itemTpl = $(ui.draggable).attr("data-item-template");
             var typeTpl = $(ui.draggable).attr("data-type-template");
-            var img = createLevelElement(typeTpl, itemTpl, imgSrc);
+            var dataX = $(ui.draggable).attr("data-x");
+            var dataY = $(ui.draggable).attr("data-y");
+            var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY);
             $(this).append(img);
-            img.draggable({
-                revert: false,
-                helper: "original"
-            });
+            setDraggable(img);
+            if(ui.draggable.hasClass("level-element")) {
+            	ui.draggable.remove();
+            }
             $(".drop-target").removeClass('highlight-yellow');
             $(".drop-target").removeClass('highlight-blue');
         },
@@ -266,7 +299,7 @@ $(document).ready(function() {
             $(this).addClass('highlight-yellow');
         },
         out: function(event, ui) {
-        		removeImgOverlay('#'+$(this).attr("id"));
+            removeImgOverlay('#'+$(this).attr("id"));
             $(".drop-target").removeClass('highlight-yellow');
             $(".drop-target").removeClass('highlight-blue');
         }
