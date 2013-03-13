@@ -272,6 +272,8 @@ $(document).ready(function() {
         }
     });
 
+    $("#mapcubus-tabs").tabs();
+
     $("#accordeon").accordion({
         collapsible: true
     });
@@ -302,5 +304,9 @@ $(document).ready(function() {
     
     $('#show-grid').change(function() {
     	  $(".cellule").toggleClass('grid-border');
+    });
+
+    $('#mapcubus-scenarii-button-add').click(function() {
+        $('#mapcubus-scenarii-zones').append('<div id="add-a-counter"><H2>Zone $counter</H2><textarea rows="10" cols="80"></textarea></div>');
     });
 });
