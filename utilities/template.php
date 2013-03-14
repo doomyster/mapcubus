@@ -2,10 +2,10 @@
 function genererNiveau($contenu) {
     $grille = "";
     for ($i=0; $i < 64; $i++) {
-        $grille .= '<div class="ligne">';
+        $grille .= '<div class="grid-line">';
         for ($j=0; $j < 64; $j++) {
             $grille .= '<div id="c-'.$j.'-'.$i.'"';
-            $grille .= ' class="cellule grid-border drop-target" >';
+            $grille .= ' class="grid-cell grid-border drop-target" >';
 	    if(isset($contenu['c-'.$j.'-'.$i])) {
 		foreach($contenu['c-'.$j.'-'.$i] as $level_element) {
 		    $grille .= '<img class="level-element draggable" src="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/' .$level_element['item']. '/' .$level_element['type'].'" />';

@@ -1,14 +1,14 @@
-.scr {
+.grid-container {
     overflow: visible;
     table-layout: fixed;
     width: 4160px;
 }
 
-.ligne {
+.grid-line {
     height: 64px;
 }
 
-.cellule {
+.grid-cell {
     width:  64px;
     height: 64px;
     position: relative;
@@ -19,15 +19,15 @@
     -webkit-box-sizing:border-box;
 }
 
-.categorie_menu {
-    max-height: 450px;
-}
-
 .grid-border {
 	border: none;
 }
 
-.element_menu {
+.menu-category {
+    max-height: 450px;
+}
+
+.menu-element {
     color: black;
     width: 100%;
 }

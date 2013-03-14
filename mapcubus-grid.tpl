@@ -35,7 +35,7 @@
 </div>
 
 <div id="contenu">
-    <div class="scr">
+    <div class="grid-container">
 	<?= $contenu; ?>
     </div>
 </div>

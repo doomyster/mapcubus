@@ -112,14 +112,14 @@ function ScanXmlData($data) {
     $pieces = '';
     foreach ($categories as $cat) {
         $pieces .= '<h3><a href="#">' . $cat->name . '</a></h3>';
-        $pieces .= '<div class="categorie_menu"><p>';
+        $pieces .= '<div class="menu-category"><p>';
 
         foreach($cat->items as $i) {
             $imgs = $i->getFiles();
             $counter = 0;
             foreach ($imgs as $im) {
                 $size = getimagesize('http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/'.$cat->template.'/'.$im);
-                $pieces .= '<span class="feuille_menu"><img class="illustration_menu draggable" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
+                $pieces .= '<span class="menu-leaf"><img class="menu-icon draggable" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
                 if ($counter == 1) {
                     $counter = -1;
                     $pieces .= '<br>';
@@ -139,10 +139,10 @@ $liste = ScanXmlData("./data.xml");
 function genererGrille() {
     $grille = "";
     for ($i=0; $i < 64; $i++) {
-        $grille .= '<div class="ligne">';
+        $grille .= '<div class="grid-line">';
         for ($j=0; $j < 64; $j++) {
             $grille .= '<div id="c-'.$j.'-'.$i.'"';
-            $grille .= ' class="cellule grid-border drop-target" >';
+            $grille .= ' class="grid-cell grid-border drop-target" >';
             $grille .= "</div>";
         }
         $grille .= "</div>";

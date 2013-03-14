@@ -84,7 +84,7 @@ function commitLocal() {
 }
 
 function fetchAttributesFromMenu(item) {
-	var tpl = $(".illustration_menu[data-type-template='"+item.type+"'][data-item-template='"+item.item+"']");
+	var tpl = $(".menu-icon[data-type-template='"+item.type+"'][data-item-template='"+item.item+"']");
 	item.dataX = tpl.attr("data-x");
 	item.dataY = tpl.attr("data-y");
 	
@@ -340,7 +340,7 @@ $(document).ready(function() {
     });
     
     $('#show-grid').change(function() {
-    	  $(".cellule").toggleClass('grid-border');
+    	  $(".grid-cell").toggleClass('grid-border');
     });
 
     $('#mapcubus-scenarii-button-add').click(function() {
