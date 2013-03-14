@@ -132,12 +132,12 @@ function revertLocal() {
 function fetchMapListFromServer() {
 	$.get('server.php?action=getLevelsList', function(data) {
         levels = data;
-        $('#levels_load_list').html("");
+        $('#levels-load-list').html("");
         $.each(data, function(i, item) {
-        		var levelItem = '<li data-level="'+item+'" class="level_load_element ui-widget-content">'+item+'</li>';
-        		$('#levels_load_list').append(levelItem);
+        		var levelItem = '<li data-level="'+item+'" class="level-load-element ui-widget-content">'+item+'</li>';
+        		$('#levels-load-list').append(levelItem);
         });
-        $('#levels_load_list').selectable({
+        $('#levels-load-list').selectable({
    			selected: function(event, ui) {
 						selectLevel($(ui.selected).attr("data-level"));   			
    			}
@@ -146,7 +146,7 @@ function fetchMapListFromServer() {
 }
 
 function selectLevel(level) {
-	$('#level_name_load').val(level);
+	$('#level-name-load').val(level);
 }
 
 function clearAllLevelElements() {
@@ -163,14 +163,14 @@ function createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY) {
 }
 
 function createSaveForm() {
-    $("#save_form").dialog({
+    $("#save-form").dialog({
         autoOpen: false,
         height: 300,
         width: 350,
         modal: true,
         buttons: {
             "Save Level": function() {
-                commitDistant($('#level_name_save').val());
+                commitDistant($('#level-name-save').val());
                 $( this ).dialog( "close" );
             },
             Cancel: function() {
@@ -181,19 +181,19 @@ function createSaveForm() {
     });
 
     $("#button-commit-distant").click(function() {
-        $("#save_form").dialog("open");
+        $("#save-form").dialog("open");
     });
 }
 
 function createLoadForm() {
-    $("#load_form").dialog({
+    $("#load-form").dialog({
         autoOpen: false,
         height: 300,
         width: 350,
         modal: true,
         buttons: {
             "Load Level": function() {
-                revertDistant($('#level_name_load').val());
+                revertDistant($('#level-name-load').val());
                 $(this).dialog( "close" );
             },
             Cancel: function() {
@@ -204,7 +204,7 @@ function createLoadForm() {
     });
 
     $("#button-revert-distant").click(function() {
-        $("#load_form").dialog("open");
+        $("#load-form").dialog("open");
         fetchMapListFromServer();
     });	
 }

@@ -1,18 +1,18 @@
 <div id="map-options">
-        <form id="save_form">
+        <form id="save-form">
             <fieldset>
                 <label for="name">Level name</label>
-                <input type="text" name="level_name_save" id="level_name_save" class="text ui-widget-content ui-corner-all" />
+                <input type="text" name="level-name-save" id="level-name-save" class="text ui-widget-content ui-corner-all" />
             </fieldset>
         </form>
-        <form id="load_form">
+        <form id="load-form">
             <fieldset>
 		<label for="name">Level name</label>
-		<div id="levels_list">
-			<ul id="levels_load_list">
+		<div id="levels-list">
+			<ul id="levels-load-list">
 			</ul>
 		</div>
-                <input type="hidden" name="level_name_load" id="level_name_load" class="text ui-widget-content ui-corner-all" />
+                <input type="hidden" name="level-name-load" id="level-name-load" class="text ui-widget-content ui-corner-all" />
             </fieldset>
         </form>
 
