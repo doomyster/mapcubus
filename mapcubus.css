@@ -60,7 +60,7 @@
 	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
 }
 
-#accordeon {
+#menu-accordion {
     float: left;
     position: fixed;
     margin-right: 10px;
@@ -69,63 +69,63 @@
     top: 150px;
 }
 
-#contenu {
+#grid-wrapper {
     float: left;
     height: 90%;
     padding-left: 350px;
     width: 100%;
 }
 
-#commit-distant {
+#button-commit-distant {
     left: 210px;
     top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
-#revert-distant {
+#button-revert-distant {
     left: 282px;
     top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
-#commit-local {
+#button-commit-local {
     left: 35px;
     top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
-#revert-local {
+#button-revert-local {
     left: 122px;
     top: 70px;
     position: fixed;
     z-index: 2000;
 }
 
-#all-move-left {
+#button-all-move-left {
     left: 35px;
     top: 110px;
     position: fixed;
     z-index: 2000;
 }
 
-#all-move-up {
+#button-all-move-up {
     left: 110px;
     top: 110px;
     position: fixed;
     z-index: 2000;
 }
 
-#all-move-down {
+#button-all-move-down {
     left: 202px;
     top: 110px;
     position: fixed;
     z-index: 2000;
 }
 
-#all-move-right {
+#button-all-move-right {
     left: 274px;
     top: 110px;
     position: fixed;

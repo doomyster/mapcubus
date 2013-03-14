@@ -59,7 +59,7 @@
 	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
 }
 
-#accordeon {
+#menu-accordion {
     float: left;
     position: fixed;
     border: 1px solid black;

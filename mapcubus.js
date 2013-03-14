@@ -180,7 +180,7 @@ function createSaveForm() {
         close: function() {}
     });
 
-    $("#commit-distant").click(function() {
+    $("#button-commit-distant").click(function() {
         $("#save_form").dialog("open");
     });
 }
@@ -203,7 +203,7 @@ function createLoadForm() {
         close: function() {}
     });
 
-    $("#revert-distant").click(function() {
+    $("#button-revert-distant").click(function() {
         $("#load_form").dialog("open");
         fetchMapListFromServer();
     });	
@@ -212,7 +212,7 @@ function createLoadForm() {
 function createContextMenu() {
 	$("#context-menu-options").menu();
 	$("#context-menu-options").hide();
-	$("#contenu").bind("contextmenu",function(e){
+	$("#grid-wrapper").bind("contextmenu",function(e){
 		e.preventDefault();
 		$("#context-menu-options").css({
 		left:  e.pageX,
@@ -311,7 +311,7 @@ $(document).ready(function() {
 
     $("#mapcubus-tabs").tabs();
 
-    $("#accordeon").accordion({
+    $("#menu-accordion").accordion({
         collapsible: true
     });
 
@@ -319,23 +319,23 @@ $(document).ready(function() {
     createLoadForm();
     createContextMenu();
 
-    $("#commit-local").click(function() {
+    $("#button-commit-local").click(function() {
         commitLocal();
     });
-    $("#revert-local").click(function() {
+    $("#button-revert-local").click(function() {
         revertLocal();
     });
 
-    $("#all-move-left").click(function() {
+    $("#button-all-move-left").click(function() {
         allElementsMove(-1, 0);
     });
-    $("#all-move-up").click(function() {
+    $("#button-all-move-up").click(function() {
         allElementsMove(0, -1);
     });
-    $("#all-move-down").click(function() {
+    $("#button-all-move-down").click(function() {
         allElementsMove(0, 1);
     });
-    $("#all-move-right").click(function() {
+    $("#button-all-move-right").click(function() {
         allElementsMove(1, 0);
     });
     
