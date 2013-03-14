@@ -1,7 +1,5 @@
 .scr {
-    overflow: scroll;
-    table-layout: fixed;
-    width: 4160;
+    width: 4160px;
 }
 
 .ligne {
@@ -41,6 +39,10 @@
     #max-height : 70px;
 }
 
+.mapcubus-tab {
+    padding-top: 50px;
+}
+
 #grid-options {
     float: left;
     margin-right: 10px;
@@ -69,7 +71,9 @@
 
 #contenu {
     float: left;
+    height: 90%;
     padding-left: 350px;
+    width: 100%;
 }
 
 #commit-distant {

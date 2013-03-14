@@ -14,11 +14,11 @@
                 <li><a href="#mapcubus-tab-grid">Map Editor</a></li>
                 <li><a href="#mapcubus-tab-scenarii">Scenarii Editor</a></li>
             </ul>
-            <div id="mapcubus-tab-grid">
+            <div id="mapcubus-tab-grid" class="mapcubus-tab">
                 <? include('mapcubus-grid.tpl'); ?>
             </div>
 
-            <div id="mapcubus-tab-scenarii">
+            <div id="mapcubus-tab-scenarii" class="mapcubus-tab">
                 Warning: feature not fully implemented. Content won't be saved. Yet.<br/>
                 <? include('mapcubus-scenarii.tpl'); ?>
             </div>

@@ -153,7 +153,7 @@ function genererGrille() {
 $contenu = genererGrille();
 
 ob_start();
-include('mapcubus.tpl.html');
+include('mapcubus.tpl');
 $sortie = ob_get_contents();
 
 @ob_end_clean();
