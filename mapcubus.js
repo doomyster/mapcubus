@@ -272,27 +272,30 @@ function createLevelElementFromDraggable(appendTarget, ui) {
 }
 
 function createZoneDescriptionForm(zoneCounter, zoneDescription) {
-	var validateButton = '<button id="mapcubus-scenarii-zone-'+ zoneCounter +'-validate-button" class="mapcubus-scenarii-zone-validate" data-zone-validate="mapcubus-scenarii-zone-' + zoneCounter + '">OK </button>';
-	var zoneTitle = '<h2>Zone ' + zoneCounter + '</h2>';    
-	var zoneTextArea = createZoneDescriptionTextArea(zoneCounter, zoneDescription);
-   $('#mapcubus-scenarii-zones').append('<div id="mapcubus-scenarii-zone-' + zoneCounter + '">'+
-        													 zoneTitle+
-        													 zoneTextArea+
-        													 '<br />'+validateButton+'</div>');
-   $('#mapcubus-scenarii-zone-'+ zoneCounter +'-validate-button').click(function() {
-   	var idZone = $(this).attr('data-zone-validate');
-    	var zoneDesc = '<div id="mapcubus-scenarii-zone-'+zoneCounter+'-description" data-zone-id="'+zoneCounter+'" class="mapcubus-scenarii-zone-description">'+$('#'+idZone+' textarea').val()+'</div>';
-    	$('#'+idZone+' textarea').replaceWith(zoneDesc);
-    	$(this).remove();
-    	$('#mapcubus-scenarii-zone-'+zoneCounter+'-description').dblclick(function() {
-    		$(this).replaceWith(createZoneDescriptionTextArea($(this).attr('data-zone-id'), $(this).html()));
-    	});
-   });
-}
+    var prefixId          = 'scenarii-zone-' + zoneCounter;
+    var textareaTag       = '<textarea id="' + prefixId + '-textarea" rows="10" cols="80">' + zoneDescription + '</textarea>';
+    var  previewTag       = '<div      id="' + prefixId + '-preview"></div>';
+    var showPreviewButton = '<button id="'   + prefixId + '-preview-button" data-zone="' + zoneCounter + '">Preview</button>';
+    var editButton        = '<button id="'   + prefixId + '-edit-button"    data-zone="' + zoneCounter + '">Edit</button>';
 
-function createZoneDescriptionTextArea(id, value) {
-		var zoneTextArea = '<textarea class="mapcubus-scenarii-zone-description-form" data-zone-id="'+id+'" rows="10" cols="80">'+value+'</textarea>';
-		return zoneTextArea;
+    var textareaDiv = '<div id="' + prefixId + '-edit-div">' + textareaTag + showPreviewButton + '</div>';
+    var previewDiv  = '<div id="' + prefixId + '-view-div">' +  previewTag + editButton        + '</div>';
+
+    $('#mapcubus-scenarii-zones').append('<div id="' + prefixId + '">' + textareaDiv + previewDiv + '</div>');
+    $('#' + prefixId + '-view-div').hide();
+
+    $('#' + prefixId + '-preview-button').click(function() {
+        var prefixId = 'scenarii-zone-' + $(this).attr('data-zone');
+        $('#' + prefixId + '-preview').html( $('#' + prefixId + '-textarea').val() );
+        $('#' + prefixId + '-edit-div').hide();
+        $('#' + prefixId + '-view-div').show();
+    });
+
+    $('#' + prefixId + '-edit-button').click(function() {
+        var prefixId = 'scenarii-zone-' + $(this).attr('data-zone');
+        $('#' + prefixId + '-edit-div').show();
+        $('#' + prefixId + '-view-div').hide();
+    });
 }
 
 $(document).ready(function() {
