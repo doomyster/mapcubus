@@ -271,6 +271,25 @@ function createLevelElementFromDraggable(appendTarget, ui) {
       }
 }
 
+function createZoneDescriptionForm(zoneCounter, zoneDescription) {
+	var validateButton = '<button id="mapcubus-scenarii-zone-'+ zoneCounter +'-validate-button" class="mapcubus-scenarii-zone-validate" data-zone-validate="mapcubus-scenarii-zone-' + zoneCounter + '">OK </button>';
+	var zoneTitle = '<h2>Zone ' + zoneCounter + '</h2>';    
+	var zoneTextArea = '<textarea class="mapcubus-scenarii-zone-description" data-zone-id="'+zoneCounter+'" rows="10" cols="80">'+zoneDescription+'</textarea>';
+   $('#mapcubus-scenarii-zones').append('<div id="mapcubus-scenarii-zone-' + zoneCounter + '">'+
+        													 zoneTitle+
+        													 zoneTextArea+
+        													 '<br />'+validateButton+'</div>');
+   $('#mapcubus-scenarii-zone-'+ zoneCounter +'-validate-button').click(function() {
+   	var idZone = $(this).attr('data-zone-validate');
+    	var zoneDesc = $('#'+idZone+' textarea').val();
+    	$('#'+idZone+' textarea').replaceWith(zoneDesc);
+    	$(this).remove();
+    	$('#'+idZone+' textarea').dblclick(function() {
+    		//TODO: edit current zone
+    	});
+   });
+}
+
 $(document).ready(function() {
     $(".drop-target").mouseover(function() {
 		if(currentDropTarget != null) {
@@ -344,7 +363,7 @@ $(document).ready(function() {
     });
 
     $('#mapcubus-scenarii-button-add').click(function() {
-        $('#mapcubus-scenarii-zones').append('<div id="mapcubus-scenarii-zone-' + currentZoneCounter + '"><H2>Zone ' + currentZoneCounter + '</H2><textarea rows="10" cols="80"></textarea></div>');
-    	currentZoneCounter += 1;
+    		createZoneDescriptionForm(currentZoneCounter,'');
+    		currentZoneCounter += 1;
     });
 });
