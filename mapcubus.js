@@ -60,7 +60,6 @@ function commitDistant(levelName) {
 
 function revertDistant(levelName) {
     $.get('server.php?level_name='+levelName, function(data) {
-    	  //clearAllLevelElements(); Don't to it: it's the job of revertLocal() !!!
         elementsArray = data;
         revertLocal();
     });	
@@ -104,11 +103,46 @@ function fetchAttributesFromMenu(item) {
 }
 
 function revertLocal() {
-    // clearAllLevelElements() call moved not to clear all elements unless we know we can load the map
-
     if (typeof(elementsArray.info) != "undefined" && typeof(elementsArray.info.fileVersion) != "undefined") {
         fileVersion = elementsArray.info.fileVersion;
-	if (fileVersion == "0.2") {
+        if (fileVersion == "0.4") {
+            clearAllLevelElements();
+            
+            // Ugly copy/paste from 'else if fileVersion == 0.2' to save tiles.
+            // {
+	    for (var i = 0; i < elementsArray.tiles.length; i++) {
+		currentItem = elementsArray.tiles[i];
+		var imgSrc = getImgSrc(currentItem.type, currentItem.item);
+		if(currentItem.dataX === undefined || currentItem.datay === undefined) {
+			currentItem = fetchAttributesFromMenu(currentItem);
+		}
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY);
+		$('#'+currentItem.coordsId).append(img);
+		setDraggable(img);
+            }
+            // }
+
+            // Now load scenarii
+            // {
+            for (var i = 0; i < elementsArray.scenarii.length; i++) {
+                var data = elementsArray.scenarii[i];
+                if (data.id == 'objectives') {
+                    $('#scenarii-zone-objectives-textarea').val(data.value);
+                    $('#scenarii-zone-objectives-preview' ).html(data.value);
+                }
+                else if (data.id == 'briefing') {
+                    $('#scenarii-zone-briefing-textarea').val(data.value);
+                    $('#scenarii-zone-briefing-preview' ).html(data.value);
+                }
+                else {
+                    createZoneDescriptionForm($('#mapcubus-scenarii-zones'), 'Zone ' + data.id,  data.id, data.value);
+                    currentZoneCounter += 1;
+                }
+            }
+            // }
+
+        }
+	else if (fileVersion == "0.2") {
             clearAllLevelElements();
 	    for (var i = 0; i < elementsArray.tiles.length; i++) {
 		currentItem = elementsArray.tiles[i];
@@ -163,6 +197,12 @@ function selectLevel(level) {
 
 function clearAllLevelElements() {
     $('.level-element').remove();
+    $('#scenarii-zone-objectives-textarea').val ('');
+    $('#scenarii-zone-objectives-preview' ).html('');
+    $('#scenarii-zone-briefing-textarea')  .val ('');
+    $('#scenarii-zone-briefing-preview')   .html('');
+    $('#mapcubus-scenarii-zones').html('');
+    currentZoneCounter = 0;
 }
 
 function getImgSrc(typeTpl, itemTpl) {

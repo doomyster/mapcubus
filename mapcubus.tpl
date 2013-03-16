@@ -19,7 +19,6 @@
             </div>
 
             <div id="mapcubus-tab-scenarii" class="mapcubus-tab">
-                Warning: feature not fully implemented. Content won't be saved. Yet.<br/>
                 <? include('mapcubus-scenarii.tpl'); ?>
             </div>
         </div>
