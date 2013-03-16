@@ -80,7 +80,19 @@ function commitLocal() {
         tilesArray.push(element);
     });
 
-    elementsArray = { info: { map: "mapcubus", fileVersion: "0.2" }, tiles: tilesArray };
+    zonesDescription = new Array();
+    zonesDescription.push( { id: "briefing",   value: $('#scenarii-zone-briefing-textarea')  .val() } );
+    zonesDescription.push( { id: "objectives", value: $('#scenarii-zone-objectives-textarea').val() } );
+
+    $('.scenarii-element').each(function() {
+        var dataId = $(this).attr('data-name');
+        if (dataId == "objectives" || dataId == "briefing") {
+            return;
+        }
+        zonesDescription.push( { id: dataId, value: $(this).val() } );
+    });
+
+    elementsArray = { info: { map: "mapcubus", fileVersion: "0.4" }, tiles: tilesArray, scenarii: zonesDescription };
 }
 
 function fetchAttributesFromMenu(item) {
@@ -273,7 +285,7 @@ function createLevelElementFromDraggable(appendTarget, ui) {
 
 function createZoneDescriptionForm(parentNode, zoneTitle, zoneCounter, zoneDescription) {
     var prefixId          = 'scenarii-zone-' + zoneCounter;
-    var textareaTag       = '<textarea id="' + prefixId + '-textarea" rows="10" cols="80">' + zoneDescription + '</textarea>';
+    var textareaTag       = '<textarea id="' + prefixId + '-textarea" class="scenarii-element" data-name="' + zoneCounter + '" rows="10" cols="80">' + zoneDescription + '</textarea>';
     var  previewTag       = '<div      id="' + prefixId + '-preview"></div>';
     var showPreviewButton = '<button id="'   + prefixId + '-preview-button" data-zone="' + zoneCounter + '">Preview</button>';
     var editButton        = '<button id="'   + prefixId + '-edit-button"    data-zone="' + zoneCounter + '">Edit</button>';
