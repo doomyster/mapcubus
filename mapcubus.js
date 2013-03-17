@@ -102,6 +102,15 @@ function fetchAttributesFromMenu(item) {
 	return item;
 }
 
+function layerFromType(tpe) {
+    var layer = $('img[data-item-template="' + tpe + '"][data-layer]').attr('data-layer');
+    if (layer != '') {
+        return 'grid-item-zindex-' + layer;
+    } else {
+        return '';
+    }
+}
+
 function revertLocal() {
     if (typeof(elementsArray.info) != "undefined" && typeof(elementsArray.info.fileVersion) != "undefined") {
         fileVersion = elementsArray.info.fileVersion;
@@ -116,7 +125,7 @@ function revertLocal() {
 		if(currentItem.dataX === undefined || currentItem.datay === undefined) {
 			currentItem = fetchAttributesFromMenu(currentItem);
 		}
-		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY);
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY, layerFromType(currentItem.item));
 		$('#'+currentItem.coordsId).append(img);
 		setDraggable(img);
             }
@@ -150,7 +159,7 @@ function revertLocal() {
 		if(currentItem.dataX === undefined || currentItem.datay === undefined) {
 			currentItem = fetchAttributesFromMenu(currentItem);
 		}
-		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY);
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY, layerFromType(currentItem.item));
 		$('#'+currentItem.coordsId).append(img);
 		setDraggable(img);
             }
@@ -168,7 +177,7 @@ function revertLocal() {
 		if(currentItem.dataX === undefined || currentItem.datay === undefined) {
 			currentItem = fetchAttributesFromMenu(currentItem);
 		}
-		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY);
+		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY, layerFromType(currentItem.item));
 		$('#'+currentItem.coordsId).append(img);
 		setDraggable(img);
 	    }
