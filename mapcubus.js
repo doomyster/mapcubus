@@ -209,8 +209,8 @@ function getImgSrc(typeTpl, itemTpl) {
     return "http://localhost/mapcubus/tiles/"+itemTpl+"/"+typeTpl;
 }
 
-function createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY) {
-    var img = $('<img class="level-element draggable-element" data-x="'+dataX+'" data-y="'+dataY+'" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc+'" src="'+imgSrc+'" />');
+function createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY, layer) {
+    var img = $('<img class="level-element draggable-element '+layer+'" data-x="'+dataX+'" data-y="'+dataY+'" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc+'" src="'+imgSrc+'" />');
     return img;
 }
 
@@ -315,7 +315,11 @@ function createLevelElementFromDraggable(appendTarget, ui) {
       var typeTpl = $(ui.draggable).attr("data-type-template");
       var dataX = $(ui.draggable).attr("data-x");
       var dataY = $(ui.draggable).attr("data-y");
-      var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY);
+      var layer = $(ui.draggable).attr("data-layer");
+      if (layer != "") {
+      	layer = "grid-item-zindex-" + layer;
+      }
+      var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY, layer, layer);
       appendTarget.append(img);
       setDraggable(img);
       if(ui.draggable.hasClass("level-element")) {

@@ -31,6 +31,23 @@
     padding: 10px 0;
 }
 
+.grid-item-zindex-lowest {
+    z-index: 100;
+}
+.grid-item-zindex-lower {
+    z-index: 200;
+}
+.grid-item-zindex-middle {
+    z-index: 300;
+}
+.grid-item-zindex-higher {
+    z-index: 400;
+}
+.grid-item-zindex-highest {
+    z-index: 500;
+}
+
+
 .menu-category {
     max-height: 450px;
 }

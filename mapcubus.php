@@ -119,7 +119,7 @@ function ScanXmlData($data) {
             $counter = 0;
             foreach ($imgs as $im) {
                 $size = getimagesize('http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/'.$cat->template.'/'.$im);
-                $pieces .= '<span class="menu-leaf"><img class="menu-icon draggable" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
+                $pieces .= '<span class="menu-leaf"><img class="menu-icon draggable" data-layer="'.$cat->layer.'" data-item-template="'.$cat->template.'" data-type-template="'.$im.'" data-x="'.($size[0]/64).'" data-y="'.($size[1]/64).'"  data-source="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/tiles/' . $cat->template . '/' . $im . '" src="http://'.$_SERVER['SERVER_NAME'].'/mapcubus/icons/' . $cat->template . '/' . $im . '" alt="' . $i->name . '"/></span>';
                 if ($counter == 1) {
                     $counter = -1;
                     $pieces .= '<br>';

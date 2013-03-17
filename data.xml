@@ -26,7 +26,7 @@
 	<!-- A counter may appear for some items. This counter should be displayed to the tiles board, and decreased (or increased) when an item is placed (or removed). The counter
 	     should not be a limitation, but an indication. Should be displayed in red when below 0. -->
 	<!-- Order of items should also be respected, as they might help user when editing maps. -->
-	<category name="Monsters" template="monsters" layer="higher">
+	<category name="Monsters" template="monsters" layer="highest">
 		<item name="Trite" template="trite">
 			<type/> <!-- presence of an empty tag to generate the 'white' image. Won't appear for keys because there is no 'white' key -->
 			<type name="Blue" template="_blue"/>
@@ -84,7 +84,7 @@
 		</item>
 	</category>
 
-	<category name="Inventory Items" template="objects" layer="higher">
+	<category name="Inventory Items" template="objects" layer="highest">
 		<item name="Adreniline" template="adreniline"/>
 		<item name="Armor"      template="armor"/>
 		<item name="Berserk"    template="berserk"/>
@@ -96,7 +96,7 @@
 		</item>
 	</category>
 
-	<category name="Players" template="players" layer="higher">
+	<category name="Players" template="players" layer="highest">
 		<item name="Player" template="marine">
 			<type/> <!-- Reserved for Hyacinthe -->
 			<type name="Blue" template="_blue"/>
@@ -105,7 +105,7 @@
 		</item>
 	</category>
 
-	<category name="Armory" template="weapons" layer="higher">
+	<category name="Armory" template="weapons" layer="highest">
 		<item name="Bullets" template="bullets_ammo"/>
 		<item name="Cells" template="cells_ammo"/>
 		<item name="Rocket Ammo" template="rockets_ammo"/>
@@ -128,7 +128,7 @@
 		</item>
 	</category>
 
-	<category name="Room Decorations" template="room_misc" layer="lower">
+	<category name="Room Decorations" template="room_misc" layer="higher">
 		<item name="Barrel" template="1x1_barrel"/>
 		<item name="Clue" template="1x1_clue"/>
 		<item name="Compass Rose" template="1x1_compass_rose"/>
