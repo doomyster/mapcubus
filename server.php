@@ -38,21 +38,31 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		      system("./phantomjs exportpng.js ".$file_name);
 		      $exported_file = $file_name.'.png';
 		} else {
-		      echo
 		      $exported_file = $file_name.'.html';
 		}
-		header('Content-Description: File Transfer');
-		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.basename($exported_file));
-		header('Content-Transfer-Encoding: binary');
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate');
-		header('Pragma: public');
-		header('Content-Length: ' . filesize($exported_file));
-		ob_clean();
-		flush();
-		readfile($exported_file);
-		exit;
+  
+		if(isset($_GET['deliver_method']) && $_GET['deliver_method'] == "download") {
+		      header('Content-Description: File Transfer');
+		      header('Content-Type: application/octet-stream');
+		      header('Content-Disposition: attachment; filename='.basename($exported_file));
+		      header('Content-Transfer-Encoding: binary');
+		      header('Expires: 0');
+		      header('Cache-Control: must-revalidate');
+		      header('Pragma: public');
+		      header('Content-Length: ' . filesize($exported_file));
+		      ob_clean();
+		      flush();
+		      readfile($exported_file);
+		      exit;
+		} else {
+		      if($format == 'png') { 
+			  header('Content-type: image/png'); 
+			  readfile($exported_file);   
+		      } else {
+			  header('Content-type: text/html'); 
+			  readfile($exported_file);
+		      }
+	      }
       } else {
 		$file_name = (isset($_GET['level_name']) ? $_GET['level_name'] : 'test');
 		$file_content = file_get_contents('maps/'.$file_name.'.json');
