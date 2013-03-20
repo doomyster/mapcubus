@@ -35,7 +35,7 @@ function indexizeArray($array) {
 }
 
 $niveau = $_GET['level_name'];
-$contenu = json_decode(file_get_contents('/home/aurelien/web/mapcubus/maps/'.$niveau.'.json'));
+$contenu = json_decode(file_get_contents('../maps/'.$niveau.'.json'));
 $contenu = indexizeArray($contenu);
 $grille = genererNiveau($contenu);
 
@@ -43,5 +43,5 @@ ob_start();
 include('template.tpl.html');
 $sortie = ob_get_contents();
 @ob_end_clean();
-file_put_contents('/home/aurelien/web/mapcubus/utilities/'.$niveau.'.html', $sortie);
+file_put_contents($niveau.'.html', $sortie);
 ?>

@@ -38,7 +38,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		      system("./phantomjs exportpng.js ".$file_name);
 		      $exported_file = $file_name.'.png';
 		} else {
-		      $exported_file = $file_name.'_temp.html';
+		      echo
+		      $exported_file = $file_name.'.html';
 		}
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');

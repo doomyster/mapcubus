@@ -6,8 +6,8 @@ if (system.args.length === 1) {
 }
 
 var pageName = system.args[1];
-var url = '/home/aurelien/web/mapcubus/utilities/'+pageName+'_temp.html';
+var url = pageName+'.html';
 page.open(url, function (status) {
-        var png = page.render('/home/aurelien/web/mapcubus/utilities/'+pageName+'.png');
+        var png = page.render(pageName+'.png');
         phantom.exit();
 }); 
