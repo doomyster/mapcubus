@@ -325,10 +325,7 @@ function createLevelElementFromDraggable(appendTarget, ui) {
       var dataX = $(ui.draggable).attr("data-x");
       var dataY = $(ui.draggable).attr("data-y");
       var layer = $(ui.draggable).attr("data-layer");
-      if (layer != "") {
-      	layer = "grid-item-zindex-" + layer;
-      }
-      var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY, layer, layer);
+      var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY, layerFromType(itemTpl));
       appendTarget.append(img);
       setDraggable(img);
       if(ui.draggable.hasClass("level-element")) {
