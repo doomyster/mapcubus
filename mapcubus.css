@@ -199,6 +199,7 @@ fieldset { padding:0; border:0; margin-top:25px; }
 #context-menu-options {
 	width: 150px;
 	position: absolute;
+	z-index: 10000;
 }
 
 #levels-load-list .ui-selecting { background: #FECA40; }

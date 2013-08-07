@@ -46,4 +46,14 @@
 
 <ul id="context-menu-options">
   <li><a id="delete-tile-link" href="#">Supprimer</a></li>
+  <li><a id="set-zone-0-link" href="#">Set zone (0)</a></li>
+  <li><a id="set-zone-1-link" href="#">Set zone (1)</a></li>
+  <li><a id="set-zone-2-link" href="#">Set zone (2)</a></li>
+  <li><a id="set-zone-3-link" href="#">Set zone (3)</a></li>
+  <li><a id="set-zone-4-link" href="#">Set zone (4)</a></li>
+  <li><a id="set-zone-5-link" href="#">Set zone (5)</a></li>
+  <li><a id="set-zone-6-link" href="#">Set zone (6)</a></li>
+  <li><a id="set-zone-7-link" href="#">Set zone (7)</a></li>
+  <li><a id="set-zone-8-link" href="#">Set zone (8)</a></li>
+  <li><a id="set-zone-9-link" href="#">Set zone (9)</a></li>
 </ul>

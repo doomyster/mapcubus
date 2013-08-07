@@ -69,11 +69,16 @@ function commitLocal() {
     tilesArray = new Array();
                           
     $('.level-element').each(function() {
+    	z = $(this).attr("data-zone");
+	if (z == "") {
+		z = "0";
+	}
         var element = {
             type: $(this).attr("data-type-template"),
             item: $(this).attr("data-item-template"),
             dataX: $(this).attr("data-x"),
             dataY: $(this).attr("data-y"),
+	    zone: z,
             coordsId: $(this).parent().attr("id")
         }
         tilesArray.push(element);
@@ -91,7 +96,7 @@ function commitLocal() {
         zonesDescription.push( { id: dataId, value: $(this).val() } );
     });
 
-    elementsArray = { info: { map: "mapcubus", fileVersion: "0.4" }, tiles: tilesArray, scenarii: zonesDescription };
+    elementsArray = { info: { map: "mapcubus", fileVersion: "0.6" }, tiles: tilesArray, scenarii: zonesDescription };
 }
 
 function fetchAttributesFromMenu(item) {
@@ -114,7 +119,7 @@ function layerFromType(tpe) {
 function revertLocal() {
     if (typeof(elementsArray.info) != "undefined" && typeof(elementsArray.info.fileVersion) != "undefined") {
         fileVersion = elementsArray.info.fileVersion;
-        if (fileVersion == "0.4") {
+        if (fileVersion == "0.4" || fileVersion == "0.6") {
             clearAllLevelElements();
             
             // Ugly copy/paste from 'else if fileVersion == 0.2' to save tiles.
@@ -126,6 +131,11 @@ function revertLocal() {
 			currentItem = fetchAttributesFromMenu(currentItem);
 		}
 		var img = createLevelElement(currentItem.type, currentItem.item, imgSrc, currentItem.dataX, currentItem.dataY, layerFromType(currentItem.item));
+		if(currentItem.zone != undefined) {
+			img.attr('data-zone', currentItem.zone);
+			console.log(currentItem.zone)
+			console.log(img);
+		}
 		$('#'+currentItem.coordsId).append(img);
 		setDraggable(img);
             }
@@ -219,8 +229,7 @@ function getImgSrc(typeTpl, itemTpl) {
 }
 
 function createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY, layer) {
-    var img = $('<img class="level-element draggable-element '+layer+'" data-x="'+dataX+'" data-y="'+dataY+'" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc+'" src="'+imgSrc+'" />');
-    return img;
+    return $('<img class="level-element draggable-element '+layer+'" data-x="'+dataX+'" data-y="'+dataY+'" data-type-template="'+typeTpl+'" data-item-template="'+itemTpl+'" data-source="'+imgSrc+'" src="'+imgSrc+'" />');
 }
 
 function createSaveForm() {
@@ -285,6 +294,46 @@ function createContextMenu() {
 		deleteTile();
 		$("#context-menu-options").hide();
 	});
+	$("#set-zone-0-link").click(function() {
+		setZone(0);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-1-link").click(function() {
+		setZone(1);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-2-link").click(function() {
+		setZone(2);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-3-link").click(function() {
+		setZone(3);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-4-link").click(function() {
+		setZone(4);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-5-link").click(function() {
+		setZone(5);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-6-link").click(function() {
+		setZone(6);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-7-link").click(function() {
+		setZone(7);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-8-link").click(function() {
+		setZone(8);
+		$("#context-menu-options").hide();
+	});
+	$("#set-zone-9-link").click(function() {
+		setZone(9);
+		$("#context-menu-options").hide();
+	});
 	$(document).click(function(event) {
 		if (event.which != 3) {
 			if($("#context-menu-options").is(":visible")) {
@@ -298,6 +347,17 @@ function deleteTile() {
 	if(currentDropTarget != null) {
 		elementToRemove = currentDropTarget.children(".level-element").last();
 		elementToRemove.remove();
+	}
+}
+
+function setZone(z) {
+	elems = currentDropTarget.children(".level-element");
+	for (var i = 0; i < elems.length; i++) {
+
+		// For now, only rooms are eligible to zones
+		if (elems[i].getAttribute("data-item-template") == "rooms") {
+			elems[i].setAttribute("data-zone", z);
+		}
 	}
 }
 
