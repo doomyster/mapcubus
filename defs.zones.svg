@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+
+<defs>
+    <filter id="Zone0" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="1.25  0.00  0.00  0.00  0.00 
+                   0.00  1.25  0.00  0.00  0.00 
+                   0.00  0.00  1.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone1" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="0.25 0.00 0.00 0.00  0.00 
+                   0.00 0.25 0.00 0.00  0.00 
+                   0.00 0.00 0.25 0.00  0.00 
+                   0.00 0.00 0.00 1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone2" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="0.50  0.00  0.00  0.00  0.00 
+                   0.00  0.25  0.00  0.00  0.00 
+                   0.00  0.00  1.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone3" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="0.25  0.00  0.00  0.00  0.00 
+                   0.00  0.25  0.00  0.00  0.00 
+                   0.00  0.00  1.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone4" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="0.25  0.00  0.00  0.00  0.00 
+                   0.00  1.25  0.00  0.00  0.00 
+                   0.00  0.00  1.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone5" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="0.25  0.00  0.00  0.00  0.00 
+                   0.00  1.25  0.00  0.00  0.00 
+                   0.00  0.00  0.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone6" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="1.25  0.00  0.00  0.00  0.00 
+                   0.00  1.25  0.00  0.00  0.00 
+                   0.00  0.00  0.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone7" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="1.25  0.00  0.00  0.00  0.00 
+                   0.00  0.75  0.00  0.00  0.00 
+                   0.00  0.00  0.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone8" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="1.25  0.00  0.00  0.00  0.00 
+                   0.00  0.25  0.00  0.00  0.00 
+                   0.00  0.00  0.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+
+    <filter id="Zone9" filterUnits="objectBoundingBox" 
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix" in="SourceGraphic"
+           values="0.75  0.00  0.00  0.00  0.00 
+                   0.00  0.50  0.00  0.00  0.00 
+                   0.00  0.00  0.25  0.00  0.00 
+                   0.00  0.00  0.00  1.00  0.00"/>
+    </filter>
+</defs>
+
+</svg>
+
