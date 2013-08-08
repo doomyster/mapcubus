@@ -119,9 +119,9 @@ function loadLevel($level_file, $filter_colors)
 	return $map;
 }
 
-function generateMapImage($level, $file_name)
+function generateMapImage($level, $file_name, $image_size)
 {
-	$fd = popen('convert -background transparent svg:- ' . $file_name, 'w');
+	$fd = popen('convert -resize ' . $image_size . ' -background transparent svg:- ' . $file_name, 'w');
 	fwrite($fd, '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="' . ($level['sizes'][2]*64) . 'px" height="'. ($level['sizes'][3]*64) .'px">' . "\n");
 
 	$zones = array();
@@ -174,27 +174,39 @@ function generateScenario($level, $level_name, $file_name)
 	}
 
 	$fd = fopen($file_name, 'w');
+	fwrite($fd, "<!DOCTYPE html>\n\n");
 
-	fwrite($fd, "<html><head><title>DooM - " . $level_name . "</title></head>\n");
+	fwrite($fd, "<html><head>\n");
+	fwrite($fd, "\t<title>DooM - " . $level_name . "</title>\n");
+	fwrite($fd, "\t<link href=\"style.css\" rel=\"stylesheet\"/>\n");
+	fwrite($fd, "</head>\n");
 	fwrite($fd, "<body>\n");
 
+	fwrite($fd, '<div class="text" id="briefind">' . "\n");
 	fwrite($fd, "<h1>Briefing de mission</h1>\n");
-	fwrite($fd, $briefing);
+	fwrite($fd, $briefing . "\n");
+	fwrite($fd, "</div>\n");
 
+	fwrite($fd, '<div class="text" id="objectives">' . "\n");
 	fwrite($fd, "<h1>Objectifs du sc&eacute;nario</h1>\n");
-	fwrite($fd, $objectives);
+	fwrite($fd, $objectives . "\n");
+	fwrite($fd, "</div>\n");
 
 	foreach($zones as $k => $v)
 	{
-		fwrite($fd, '<div style="float: left;">' . "\n");
-		fwrite($fd, "<h1>Zone " . $k . "</h1>\n");
-		fwrite($fd, $v);
-		fwrite($fd, '</div><div>' . "\n");
-		fwrite($fd, '<img src="zone_' . $k . '.png"></div>' . "\n");
-		fwrite($fd, '<div style="clear: both;"/>' . "\n");
+		fwrite($fd, '<div class="text" id="zone_' . $k . '">' . "\n");
+		fwrite($fd, 	"<h1>Zone " . $k . "</h1>\n");
+		fwrite($fd, 	'<div class="user_input">' . $v . "</div>\n");
+		fwrite($fd, '</div>' . "\n");
+
+		fwrite($fd, '<div class="zone_map">' . "\n");
+		fwrite($fd, '	<img src="zone_' . $k . '.png" alt="zone_' . $k . '"/>' . "\n");
+		fwrite($fd, '</div>' . "\n");
+		fwrite($fd, '<div style="clear: both;"></div>' . "\n<hr width=\"75%\">\n\n");
+		
 	}
 
-	fwrite($fd, "<img src=\"full_map.png\">\n");
+	fwrite($fd, "<img src=\"full_map.png\" alt=\"full_map\"/>\n");
 	fwrite($fd, "</body></html>\n");
 
 	fclose($fd);
@@ -239,7 +251,7 @@ function updateSizeAndOffset(&$level)
 	$level['sizes'] = array($minX, $minY, $maxX, $maxY);
 }
 
-function generateZoneMapImages($level, $full_path)
+function generateZoneMapImages($level, $full_path, $image_size)
 {
 	$cur_zone = 0;
 	$continue = true;
@@ -261,13 +273,13 @@ function generateZoneMapImages($level, $full_path)
 		if ($continue)
 		{
 			updateSizeAndOffset($work_level);
-			generateMapImage($work_level, $full_path . '/zone_' . $cur_zone . '.png');
+			generateMapImage($work_level, $full_path . '/zone_' . $cur_zone . '.png', $image_size);
 		}
 		$cur_zone += 1;
 	}
 }
 
-function main($level_name, $level_file, $filter_colors)
+function main($level_name, $level_file, $filter_colors, $misc_options)
 {
 	$level = loadLevel($level_file, $filter_colors);
 	
@@ -275,9 +287,11 @@ function main($level_name, $level_file, $filter_colors)
 	if (!file_exists($full_path) and !is_dir($full_path))
 		mkdir($full_path, 0777, true);
 
-	generateMapImage($level, $full_path . '/full_map.png');
-	generateZoneMapImages($level, $full_path);
+	generateMapImage($level, $full_path . '/full_map.png', $misc_options['image_size']);
+	generateZoneMapImages($level, $full_path, $misc_options['image_size']);
 	generateScenario($level, $level_name, $full_path . '/index.html');
+	$css = str_replace('__RIGHT_MARGIN__', $misc_options['text_right_margin'], file_get_contents('style.css.tpl'));
+	file_put_contents($full_path . '/style.css', $css);
 
 	print("<pre>");
 	print_r($level);
@@ -287,6 +301,7 @@ function main($level_name, $level_file, $filter_colors)
 $g_level_file = '';
 $g_level_name = '';
 $g_filter_color = '/^(white|red|green|blue)$/';
+$g_misc_options = array('text_right_margin' => '0%', 'image_size' => '100%');
 
 if (isset($_GET['level_name']))
 {
@@ -318,8 +333,86 @@ if (isset($_GET['colors']))
 
 	$g_filter_color .= ')$/';
 }
+if (isset($_GET['text_right_margin']))
+{
+	if (preg_match('/^[0-9]+(cm|mm|in|p[tcx]|e[mx]|ch|rem|%)$/', $_GET['text_right_margin']) > 0)
+		$g_misc_options['text_right_margin'] = $_GET['text_right_margin'];
+	else
+		die("Incorect right text margin given: '" . $_GET['text_right_margin'] . "'.");
+}
+if (isset($_GET['image_size']))
+{
+	if (preg_match('/^(100|[1-9]0%)$/', $_GET['image_size'], $matches) > 0)
+		$g_misc_options['image_size'] = $matches[1];
+	else
+		die("Incorect image size given: '" . $_GET['image_size'] . "'.");
+}
 
-main($g_level_name, $g_level_file, $g_filter_color);
+if ($g_level_name != '')
+{
+	main($g_level_name, $g_level_file, $g_filter_color, $g_misc_options);
+}
+else
+{
+# TODO: Should include a template rather than putting hard-coded html here
+?>
+<html><head><title>Mapcubus Map Exporter</title></head>
+<body>
+<form method="GET">
+<div>
+Choose map:
+<select name="level_name">
+<?
+$dir = opendir('maps');
+while($file = readdir($dir))
+{
+	if (preg_match('/[.]json$/', $file) > 0)
+		print('<option>' . substr($file, 0, -5) . "</option>\n");
+}
+closedir($dir);
+?>
+</select>
+</div>
 
+<div>
+Filter player colors:
+<select name="colors">
+<option value="red,green,blue">Tous</option>
+<option value="red,green"     >Joueurs rouge et vert</option>
+<option value="red,blue"      >Joueurs rouge et bleu</option>
+<option value="green,blue"    >Joueurs vert et bleu</option>
+<option value="red"           >Joueur rouge</option>
+<option value="green"         >Joueur vert</option>
+<option value="blue"          >Joueur bleu</option>
+</select>
+</div>
 
+<div>
+R&eacute;duire la taille des images:
+<select name="image_size">
+<option>100%</option>
+<option>90%</option>
+<option>80%</option>
+<option>70%</option>
+<option>60%</option>
+<option>50%</option>
+<option>40%</option>
+<option>30%</option>
+<option>20%</option>
+<option>10%</option>
+</select>
+</div>
+
+<div>
+Limiter la marge droite du texte:
+<input type="text" name="text_right_margin" value="0%">
+</div>
+<input type="submit" value="Go go go !">
+
+</form>
+</body>
+</html>
+
+<?
+}
 ?>

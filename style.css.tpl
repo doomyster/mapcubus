@@ -17,3 +17,12 @@
 	margin-top: 2em;
 }
 
+.text {
+	float: left;
+	margin-right: __RIGHT_MARGIN__;
+}
+
+.zone_map {
+	float: right;
+}
+
