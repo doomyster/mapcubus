@@ -386,6 +386,12 @@ function createLevelElementFromDraggable(appendTarget, ui) {
       var dataY = $(ui.draggable).attr("data-y");
       var layer = $(ui.draggable).attr("data-layer");
       var img = createLevelElement(typeTpl, itemTpl, imgSrc, dataX, dataY, layerFromType(itemTpl));
+      // add selected zone here
+      if (itemTpl == 'rooms') {
+          img.attr("data-zone", $('#current-zone').html());
+          console.log(img);
+      }
+
       appendTarget.append(img);
       setDraggable(img);
       if(ui.draggable.hasClass("level-element")) {
@@ -491,6 +497,37 @@ $(document).ready(function() {
     
     $('#show-grid').change(function() {
     	  $(".grid-cell").toggleClass('grid-border');
+    });
+
+    $('#zone-selection-0').click(function() {
+    	$('#current-zone').html('0');
+    });
+    $('#zone-selection-1').click(function() {
+    	$('#current-zone').html('1');
+    });
+    $('#zone-selection-2').click(function() {
+    	$('#current-zone').html('2');
+    });
+    $('#zone-selection-3').click(function() {
+    	$('#current-zone').html('3');
+    });
+    $('#zone-selection-4').click(function() {
+    	$('#current-zone').html('4');
+    });
+    $('#zone-selection-5').click(function() {
+    	$('#current-zone').html('5');
+    });
+    $('#zone-selection-6').click(function() {
+    	$('#current-zone').html('6');
+    });
+    $('#zone-selection-7').click(function() {
+    	$('#current-zone').html('7');
+    });
+    $('#zone-selection-8').click(function() {
+    	$('#current-zone').html('8');
+    });
+    $('#zone-selection-9').click(function() {
+    	$('#current-zone').html('9');
     });
 
     $('#mapcubus-scenarii-button-add').click(function() {

@@ -134,7 +134,50 @@ function ScanXmlData($data) {
     return $pieces;
 }
 
-$liste = ScanXmlData("./data.xml");
+function generateZoneSelector()
+{
+	$res  = '<h3><a href="#">Zone selector</a></h3>';
+	$res .= '<div class="menu-category">';
+
+	$colors = array(0 => '#ffffff',
+	                1 => '#404040', 
+			2 => '#7F00FF',
+			3 => '#0000ff',
+			4 => '#007fff',
+			5 => '#00ff00',
+			6 => '#ffff00',
+			7 => '#ff7f00',
+			8 => '#ff0000',
+			9 => '#7f3f00');
+
+	$res .= '<table>';
+	foreach ($colors as $k => $c)
+	{
+		if (($k % 2) == 0)
+			$res .= '<tr>';
+		if ($k == 0)
+			$selected = ' checked="yes"';
+		else
+			$selected = '';
+
+		$res .= '<td><input id="zone-selection-' . $k . '" type="radio" name="zone-color-selection"' . $selected . '></td>';
+		$res .= '<td><div style="width: 32px; height: 32px; background-color: ' . $c . '; border: solid black;"></div></td>';
+	
+		if ((($k+1) % 2) == 0)
+			$res .= '</tr>';
+	}
+	$res .= '</table>';
+	
+	$res .= 'Zone <span id="current-zone">0</span>';
+	$res .= '</div>';
+
+	return $res;
+}
+
+$liste = ScanXmlData("./data.xml") . generateZoneSelector();
+
+
+
 
 function genererGrille() {
     $grille = "";
