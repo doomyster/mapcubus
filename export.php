@@ -61,7 +61,7 @@ function loadLevel($level_file, $filter_colors)
 {
 	$level = file_get_contents($level_file);
 	if ($level === false)
-		die("Could not load level: '" . $level_file . "'");
+		throw new Exception("Could not load level: '" . $level_file . "'");
 
 	$jmap = json_decode($level, true);
 	$gmap = array('rooms'     => array(),
@@ -292,10 +292,6 @@ function main($level_name, $level_file, $filter_colors, $misc_options)
 	generateScenario($level, $level_name, $full_path . '/index.html');
 	$css = str_replace('__RIGHT_MARGIN__', $misc_options['text_right_margin'], file_get_contents('style.css.tpl'));
 	file_put_contents($full_path . '/style.css', $css);
-
-	print("<pre>");
-	print_r($level);
-	print("</pre>");
 }
 
 $g_level_file = '';
@@ -303,61 +299,72 @@ $g_level_name = '';
 $g_filter_color = '/^(white|red|green|blue)$/';
 $g_misc_options = array('text_right_margin' => '0%', 'image_size' => '100%');
 
-if (isset($_GET['level_name']))
+try
 {
-	if (file_exists('maps/' . $_GET['level_name'] . '.json'))
+	if (isset($_GET['level_name']))
 	{
-		$g_level_name = $_GET['level_name'];
-		$g_level_file = 'maps/' . $_GET['level_name'] . '.json';
-	}
-	else
-		die("Level '" . $_GET['level_name'] . "' does not exist.");
-}
-
-if (isset($_GET['colors']))
-{
-	$tmp = explode(',', $_GET['colors']);
-	$g_filter_color = "/^(white";
-
-	foreach ($tmp as $c)
-	{
-		if ($c == 'blue')
-			$g_filter_color .= '|blue';
-		else if ($c == 'red')
-			$g_filter_color .= '|red';
-		else if ($c == 'green')
-			$g_filter_color .= '|green';
+		if (file_exists('maps/' . $_GET['level_name'] . '.json'))
+		{
+			$g_level_name = $_GET['level_name'];
+			$g_level_file = 'maps/' . $_GET['level_name'] . '.json';
+		}
 		else
-			die("Incorrect color given: '" . $c . "'.");
+			throw new Exception("Level '" . $_GET['level_name'] . "' does not exist.");
 	}
 
-	$g_filter_color .= ')$/';
+	if (isset($_GET['colors']))
+	{
+		$tmp = explode(',', $_GET['colors']);
+		$g_filter_color = "/^(white";
+
+		foreach ($tmp as $c)
+		{
+			if ($c == 'blue')
+				$g_filter_color .= '|blue';
+			else if ($c == 'red')
+				$g_filter_color .= '|red';
+			else if ($c == 'green')
+				$g_filter_color .= '|green';
+			else
+				throw new Exception("Incorrect color given: '" . $c . "'.");
+		}
+
+		$g_filter_color .= ')$/';
+	}
+	if (isset($_GET['text_right_margin']))
+	{
+		if (preg_match('/^[0-9]+(cm|mm|in|p[tcx]|e[mx]|ch|rem|%)$/', $_GET['text_right_margin']) > 0)
+			$g_misc_options['text_right_margin'] = $_GET['text_right_margin'];
+		else
+			throw new Exception("Incorect right text margin given: '" . $_GET['text_right_margin'] . "'.");
+	}
+	if (isset($_GET['image_size']))
+	{
+		if (preg_match('/^(100%|[1-9]0%)$/', $_GET['image_size'], $matches) > 0)
+			$g_misc_options['image_size'] = $matches[1];
+		else
+			throw new Exception("Incorect image size given: '" . $_GET['image_size'] . "'.");
+	}
+
+	$main_output = '';
+	if ($g_level_name != '')
+	{
+		main($g_level_name, $g_level_file, $g_filter_color, $g_misc_options);
+		$main_output = '<a href="output/' . $g_level_name . '">Go to exported map.</a><br>';
+	}
 }
-if (isset($_GET['text_right_margin']))
+catch(Exception $e)
 {
-	if (preg_match('/^[0-9]+(cm|mm|in|p[tcx]|e[mx]|ch|rem|%)$/', $_GET['text_right_margin']) > 0)
-		$g_misc_options['text_right_margin'] = $_GET['text_right_margin'];
-	else
-		die("Incorect right text margin given: '" . $_GET['text_right_margin'] . "'.");
-}
-if (isset($_GET['image_size']))
-{
-	if (preg_match('/^(100|[1-9]0%)$/', $_GET['image_size'], $matches) > 0)
-		$g_misc_options['image_size'] = $matches[1];
-	else
-		die("Incorect image size given: '" . $_GET['image_size'] . "'.");
+	$main_output = $e->getMessage();
 }
 
-if ($g_level_name != '')
-{
-	main($g_level_name, $g_level_file, $g_filter_color, $g_misc_options);
-}
-else
-{
-# TODO: Should include a template rather than putting hard-coded html here
 ?>
+
 <html><head><title>Mapcubus Map Exporter</title></head>
 <body>
+
+<? echo $main_output; ?>
+
 <form method="GET">
 <div>
 Choose map:
@@ -408,11 +415,10 @@ Limiter la marge droite du texte:
 <input type="text" name="text_right_margin" value="0%">
 </div>
 <input type="submit" value="Go go go !">
+<hr>
 
+<a href="mapcubus.php">Return to editor</a><br>
 </form>
 </body>
 </html>
 
-<?
-}
-?>

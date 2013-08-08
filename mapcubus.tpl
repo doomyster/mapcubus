@@ -13,6 +13,7 @@
             <ul>
                 <li><a href="#mapcubus-tab-grid">Map Editor</a></li>
                 <li><a href="#mapcubus-tab-scenarii">Scenarii Editor</a></li>
+		<li><a href="#mapcubus-tab-exporter">Map Exporter</a></li>
             </ul>
             <div id="mapcubus-tab-grid" class="mapcubus-tab">
                 <? include('mapcubus-grid.tpl'); ?>
@@ -21,6 +22,10 @@
             <div id="mapcubus-tab-scenarii" class="mapcubus-tab">
                 <? include('mapcubus-scenarii.tpl'); ?>
             </div>
+
+	    <div id="mapcubus-tab-exporter" class="mapcubus-exporter">
+	    	<? include('mapcubus-exporter.tpl'); ?>
+	    </div>
         </div>
     </body>
 </html>
