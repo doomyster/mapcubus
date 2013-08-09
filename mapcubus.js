@@ -53,9 +53,17 @@ function allElementsMove(xdir, ydir) {
 
 function commitDistant(levelName) {
     commitLocal();
-    $.post('server.php','level_name='+levelName+'&'+'level_content='+JSON.stringify(elementsArray), function(data) {
-           window.alert("level saved successfully !");
-    });	
+    $.ajax({
+    	type: 'post',
+	url:  'server.php',
+	data: 'level_name='+levelName+'&'+'level_content='+JSON.stringify(elementsArray),
+	success: function(data) {
+		alert(data);
+	},
+	error: function() {
+		alert("Error sending save request.");
+	}
+    });
 }
 
 function revertDistant(levelName) {

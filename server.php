@@ -5,12 +5,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
   case 'POST':
       $file_content = $_POST['level_content'];
       $file_name =  $_POST['level_name'];
+      ini_set('display_errors', '0');
+      ini_set('track_errors', '1');
       $success = file_put_contents('maps/'.$file_name.'.json', $file_content);
       if ($success === false) {
-          echo '<div id="result">fail</div>';
+          echo $php_errormsg;
       }
       else {
-          echo '<div id="result">ok</div>';
+          echo "Map '$file_name' saved successfully";
       }
   break;
   
@@ -25,6 +27,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		    }
 		    closedir($handle);
 		}
+		sort($levels);
 		header('Content-Type: application/json');
 		echo json_encode($levels);
 		exit;
